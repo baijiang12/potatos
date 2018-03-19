@@ -1,0 +1,17 @@
+<!--pages/tools/tools-game-today/tools-game-today.wxml-->
+<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
+  <view class="team-view">
+    <image src="../../../images/team/20180319111149.png"></image>
+    <text>ac米兰</text>
+  </view>
+  <view class="text-middle-view">
+    <view>2018-12-11</view>
+    <view>12:28</view>
+    <view>未开赛</view>
+  </view>
+  <view class="team2-view">
+    <image src="../../../images/team/20180319111332.png"></image>
+    <text>国际米兰</text>
+  </view>
+</view>
+<view class="middle-ribbon"></view>

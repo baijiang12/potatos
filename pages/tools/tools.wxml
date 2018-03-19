@@ -1,0 +1,18 @@
+<!--pages/tools/tools.wxml-->
+<import src="tools-template/tools-template.wxml" />
+<view class="tools-container">
+  <view >
+    <view class="gameing">
+      <text >已开赛</text>
+    </view>
+      <template is="tools-template"/>
+  </view>
+
+  <view class="middle-ribbon"></view>
+
+  <view class="notgame">
+    <text>未开赛</text>
+      <template is="tools-template"/>
+  </view>
+   
+</view>

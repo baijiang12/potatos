@@ -1,0 +1,77 @@
+@import "../tools-players-template/tools-players-template.wxss";
+.tool-game-today-detail-container{
+  display: flex;
+  flex-direction: column;
+}
+.game-detail-top{
+  display: flex;
+  flex-direction: row;
+}
+.detail-top-left{
+  display: flex;
+  flex-direction: column;
+  width: 155rpx;
+  align-items: center;
+  margin-left: 20rpx;
+}
+.detail-top-middle{
+  display: flex;
+  flex-direction: column;
+  width: 400rpx;
+  align-items: center;
+}
+.detail-top-right{
+  display: flex;
+  flex-direction: column;
+  width: 155rpx;
+  align-items: center;
+  margin-right: 20rpx;
+}
+.team-image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.team-name-text{
+  font-size: 27rpx;
+  margin-bottom: 5rpx;
+}
+.team-support-text{
+  font-size: 27rpx;
+  margin-top: 6rpx;
+}
+.game-status{
+  font-size: 25rpx;
+  margin-top: 7rpx;  
+}
+.game-score{
+  display: flex;
+  flex-direction: row;
+  margin-top: 55rpx;
+  font-size: 55rpx;
+}
+.game-score1{
+  margin-right: 100rpx;
+}
+.game-score2{
+  margin-left: 100rpx;
+}
+.game-detail-bottom{
+  display: flex;
+  flex-direction: column;
+}
+.detail-bottom-top{
+  display: flex;
+  flex-direction: row;
+}
+.detail-bottom-top-left{
+  width: 50%;
+}
+.scroll-view_H{
+  width: 100%;
+  white-space: nowrap;
+}
+.scroll-view-item_H{
+  margin: 20rpx 20rpx;
+  display: inline-block;
+}

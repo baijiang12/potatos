@@ -1,0 +1,22 @@
+/* pages/tools/tools-game-today/tools-players-template/tools-players-template.wxss */
+.players-template-container{
+  display: flex;
+  flex-direction: row;
+  border: 1rpx 	#E0E0E0 solid;
+  width: 300rpx;
+  height: 140rpx;
+  padding-top: 30rpx;
+  padding-bottom: 10rpx;
+  border-radius: 7rpx;
+}
+.players-image image{
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 15rpx;
+}
+.plsyers-message{
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+  margin-left: 15rpx;
+}

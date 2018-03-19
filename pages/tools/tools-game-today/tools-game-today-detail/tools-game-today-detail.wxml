@@ -1,0 +1,45 @@
+<import src="../tools-players-template/tools-players-template.wxml"/>
+<view class="tool-game-today-detail-container">
+  <view class="game-detail-top">
+    <view class="detail-top-left">
+      <text class="team-name-text">圣埃蒂安</text>
+      <image class="team-image" src="../../../../images/team/20180319111149.png"></image>
+      <text class="team-support-text">239</text>
+    </view>
+    <view class="detail-top-middle">
+      <view class="game-score">
+        <view class="game-score1"><text>2</text></view>
+        <view class="game-dot"><text>:</text></view>
+        <view class="game-score2"><text>0</text></view>
+      </view>
+      <view class="game-status">
+        <text>已结束</text>
+      </view>
+    </view>
+    <view class="detail-top-right">
+      <text class="team-name-text">甘冈</text>
+      <image class="team-image" src="../../../../images/team/20180319111332.png"></image>
+      <text class="team-support-text">778</text>
+    </view>
+  </view>
+
+  <progress percent="40" stroke-width="3" activeColor="	#F75000" backgroundColor="#484891"/>
+
+  <view class="game-detail-bottom">
+    <view class="detail-bottom-top">
+      <view class="detail-bottom-top-left"><text>动态</text></view>
+      <view class="detail-bottom-top-right"><text>数据</text></view>
+    </view>
+    <progress percent="50" stroke-width="3" activeColor="green"/>
+    <view class="detail-bottom-bottom">
+      <view>
+        <scroll-view class="scroll-view_H" scroll-x  style="width: 100%">
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>

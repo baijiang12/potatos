@@ -1,0 +1,11 @@
+ <import src="tools-detail-template/tools-detail-template.wxml" />
+  <template name="tools-template">  
+<view class="tools-template-container">
+  <view class="top-module">
+      <template is="detail-template" />
+      <template is="detail-template" />
+      <template is="detail-template" />
+  </view>
+  
+</view>
+  </template>  

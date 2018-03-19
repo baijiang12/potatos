@@ -1,0 +1,10 @@
+<template name="detail-template">   
+<view class="detail-template-container" catchtap="sportDetail" data-sportid="2">
+    <view class="detail-img">
+      <image class="detail-image" src="../../../../images/sports/20180318163823.png"></image>
+    </view>
+    <view class="detail-text">
+      <text>篮球</text>
+    </view>
+</view>
+</template>   

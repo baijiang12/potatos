@@ -1,0 +1,38 @@
+/* pages/tools/tools-game-today/tools-game-today.wxss */
+.tools-game-today-container{
+  display: flex;
+  flex-direction: row;
+}
+image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.team-view{
+  display: flex;
+  flex-direction: column;
+  width: 175rpx;
+  align-items: center;
+  margin-left: 40rpx;
+}
+.team2-view{  
+  display: flex;
+  flex-direction: column;
+  width: 175rpx;
+  align-items: center;
+  margin-right: 40rpx;
+  /* border-radius: 5rpx; */
+  /* border: 1px solid; */
+}
+.text-middle-view{
+  display: flex;
+  flex-direction: column;
+  width: 300rpx;
+  align-items: center;
+  /* margin: 0 0 0 70rpx; */
+}
+.middle-ribbon{
+     /* border: 1px solid;  */
+   width: 750rpx;
+  height: 35rpx;
+  background: #eeeeee;
+}
