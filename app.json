@@ -1,12 +1,47 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/news/news",
+    "pages/tasks/tasks",
+    "pages/tools/tools",
+    "pages/me/me",
+    "pages/tools/tools-template/tools-template",
+    "pages/tools/tools-template/tools-detail-template/tools-detail-template",
+    "pages/tools/tools-game-today/tools-game-today",
+    "pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail",
+    "pages/tools/tools-game-today/tools-players-template/tools-players-template"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/news/news",
+        "text": "咨询",
+        "iconPath": "images/tarbar/news.png",
+        "selectedIconPath": "images/tarbar/news_selected.png"
+      },
+      {
+        "pagePath": "pages/tasks/tasks",
+        "text": "任务",
+        "iconPath": "images/tarbar/tasks.png",
+        "selectedIconPath": "images/tarbar/tasks_selected.png"
+      },
+      {
+        "pagePath": "pages/tools/tools",
+        "text": "工具",
+        "iconPath": "images/tarbar/tools.png",
+        "selectedIconPath": "images/tarbar/tools_selected.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "Me",
+        "iconPath": "images/tarbar/me.png",
+        "selectedIconPath": "images/tarbar/me_selected.png"
+      }
+    ]
   }
 }
