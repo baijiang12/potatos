@@ -65,7 +65,16 @@
   flex-direction: row;
 }
 .detail-bottom-top-left{
+  display: flex;
+  flex-direction: column;
   width: 50%;
+  align-items: center;
+}
+.detail-bottom-top-right{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: center;
 }
 .scroll-view_H{
   width: 100%;
@@ -74,4 +83,9 @@
 .scroll-view-item_H{
   margin: 20rpx 20rpx;
   display: inline-block;
+}
+.selected{
+  background: red;
+  height: 2rpx;
+  width: 320rpx;
 }

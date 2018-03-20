@@ -27,12 +27,17 @@
 
   <view class="game-detail-bottom">
     <view class="detail-bottom-top">
-      <view class="detail-bottom-top-left"><text>动态</text></view>
-      <view class="detail-bottom-top-right"><text>数据</text></view>
+      <view class="detail-bottom-top-left" data-lor="left" catchtap="switchTab">
+        <text>动态</text>
+        <view class="{{theTab == 'left'? 'selected':'noselected'}}"></view>
+      </view>
+      <view class="detail-bottom-top-right" data-lor="right" catchtap="switchTab">
+        <text>数据</text>
+        <view class="{{theTab == 'right'? 'selected':'noselected'}}"></view>
+      </view>
     </view>
-    <progress percent="50" stroke-width="3" activeColor="green"/>
-    <view class="detail-bottom-bottom">
-      <view>
+    <view wx:if="{{theTab == 'left'}}" class="detail-bottom-bottom">
+      <view class="detail-team1">
         <scroll-view class="scroll-view_H" scroll-x  style="width: 100%">
           <view class="scroll-view-item_H"><template is="players-template"/></view>
           <view class="scroll-view-item_H"><template is="players-template"/></view>
@@ -40,6 +45,16 @@
           <view class="scroll-view-item_H"><template is="players-template"/></view>
         </scroll-view>
       </view>
+      <view class="detail-team1">
+          <scroll-view class="scroll-view_H" scroll-x  style="width: 100%">
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+          <view class="scroll-view-item_H"><template is="players-template"/></view>
+        </scroll-view>
+      </view>
     </view>
+    <view wx:else=""> 3 </view>
+    
   </view>
 </view>
