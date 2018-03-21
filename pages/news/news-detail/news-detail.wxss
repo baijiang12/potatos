@@ -1,0 +1,230 @@
+.detail-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.head-image {
+  margin: 20rpx;
+  width: 95%;
+  height: 460rpx;
+  border-radius: 25px;
+  box-shadow: 2px 0px 6px 0.1px #aaa;
+}
+
+.author-date {
+  flex-direction: row;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  height: 75rpx;
+  width: 75rpx;
+  vertical-align: middle;
+}
+
+.author {
+  font-size: 30rpx;
+  font-weight: 300;
+  margin-left: 20rpx;
+  vertical-align: middle;
+  color: #666;
+}
+
+.const-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+.date {
+  font-size: 24rpx;
+  margin-left: 30rpx;
+  vertical-align: middle;
+  color: #999;
+}
+
+.title {
+  margin: 25rpx 10rpx 5rpx 30rpx;
+  /* margin-left: 40rpx; *//* font-size: 36rpx; */
+  font-weight: 700;
+  /* margin-top: 30rpx; */
+  letter-spacing: 2px;
+  color: #4b556c;
+}
+
+.horizon {
+  width: 660rpx;
+  height: 1px;
+  background-color: #e5e5e5;
+  vertical-align: middle;
+  position: relative;
+  top: 46rpx;
+  margin: 0 auto;
+  z-index: -99;
+}
+
+.horizon2 {
+  width: 704rpx;
+  height: 1px;
+  background-color: #e5e5e5;
+  vertical-align: middle;
+  position: relative;
+  top: 19rpx;
+  margin: 0 auto;
+  z-index: -99;
+}
+
+.detail {
+  color: #666;
+  margin-left: 30rpx;
+  margin-top: 97rpx;
+  margin-right: 30rpx;
+  line-height: 44rpx;
+  letter-spacing: 2px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  margin: 5rpx;
+}
+
+.user-img {
+  height: 75rpx;
+  width: 75rpx;
+  vertical-align: middle;
+}
+
+/* .user-data {
+  display: flex;
+  flex-direction: column;
+} */
+
+.username {
+  font-size: 30rpx;
+  font-weight: 300;
+  margin-left: 20rpx;
+  vertical-align: middle;
+  color: #666;
+}
+
+.user-data {
+  margin: 34rpx 0 0 20rpx;
+}
+
+.commnd-list {
+  font-size: 35rpx;
+  font-weight: 700;
+  margin-top: 80rpx;
+  margin-left: 25rpx;
+  vertical-align: middle;
+  color: #4b556c;
+}
+
+.comment-date {
+  float: right;
+  font-size: 30rpx;
+  font-weight: 300;
+  margin-top: 20rpx;
+  margin-right: 30rpx;
+  vertical-align: middle;
+  color: #666;
+}
+
+.comment-content {
+  font-size: 30rpx;
+  font-weight: 300;
+  vertical-align: middle;
+  color: #666;
+  padding: 20rpx;
+  line-height: 55rpx;
+}
+
+.love {
+  /* margin-left: 580rpx; */
+  padding: 10rpx;
+}
+
+.love-img {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 600rpx;
+}
+
+.love-num {
+  margin-top: 4rpx;
+  margin-right: 30rpx;
+  float: right;
+  font-size: 30rpx;
+  font-weight: 300;
+  color: #666;
+}
+
+.test {
+  position: fixed;
+  bottom: 0;
+}
+
+.write-comment {
+  /* border: 0 solid #CFCECF; */
+  height: 90rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: rows;
+  position: fixed;
+  bottom: 0;
+  background-color: #fbfbfb;
+}
+
+.writeButton {
+ border:0 solid #CFCECF;  
+  background-color: #fefefe;
+  color: #a6a6a6;
+  font-weight: 300;
+  font-size: 30rpx;
+  width: 330rpx;
+  height: 70rpx;
+  text-align: left;
+  letter-spacing: 2px;
+  margin-right: 50rpx;
+}
+.button{
+  margin:10rpx 10rpx 0rpx 25rpx;
+}
+
+.icon {
+  display: flex;
+  flex-direction: row;
+  float: right;
+  margin-top: 29rpx;
+  margin-left: 30rpx;
+}
+.sumLove-img {
+  float: left;
+  margin-right: 26rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.sumLove-text {
+  float: right;
+  margin-right: 50rpx;
+  font-weight: 300;
+  font-size: 30rpx;
+  color: #a6a6a6;
+}
+
+.sumCom-img {
+  float: left;
+  margin-right: 26rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.sumCom-text {
+  float: right;
+  font-weight: 300;
+  font-size: 30rpx;
+  color: #a6a6a6;
+}

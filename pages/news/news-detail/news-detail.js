@@ -1,4 +1,4 @@
-// pages/news/news.js
+// pages/news/news-detail/news-detail.js
 Page({
 
   /**
@@ -14,10 +14,6 @@ Page({
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521473246831&di=fb8ed098328bb4b928321e2999cbc74e&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F78%2F80%2F95c58PICn2f_1024.jpg',
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521474064312&di=a8ed7acf04007c4675e46219d943aa10&imgtype=0&src=http%3A%2F%2Feasyread.ph.126.net%2FpGkEQU81Eyc0_7NJk_Z1pQ%3D%3D%2F7916704721824964137.jpg'
     ],
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000
   },
 
   /**
@@ -27,14 +23,7 @@ Page({
   
   },
 
-  onNewsDetail:function(){
-    // var postId = event.currentTarget.dataset.postid;
-    wx.navigateTo({
-      url: './news-detail/news-detail'
-    })
-  },
   /**
-   * 
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
