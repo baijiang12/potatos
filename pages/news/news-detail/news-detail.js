@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    height: 20,
+    focus: false,
+    showModal: false,
     imgUrls: [
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521534040161&di=89294943dd6b8df81c3331f344194f52&imgtype=0&src=http%3A%2F%2Fbpic.ooopic.com%2F15%2F64%2F23%2F15642315-8423be90a53c3b3b4f44c44db84359a2-2.jpg',
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521473355301&di=6dc5dceaae35bb9485a586a0e2751711&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01f402565e5b5032f875ae3401ed18.png',
@@ -20,55 +23,86 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+
+  },
+  submit: function () {
+    this.setData({
+      showModal: true
+    })
   },
 
+  preventTouchMove: function () {
+
+  },
+
+  mytouchstart:function(){
+    this.setData({
+      showModal: false
+    })
+  },
+
+  go: function () {
+    this.setData({
+      showModal: false
+    })
+  },
+  bindButtonTap: function () {
+    this.setData({
+      focus: true
+    })
+  },
+  bindTextAreaBlur: function (e) {
+    console.log(e.detail.value)
+  },
+  bindFormSubmit: function (e) {
+    console.log(e.detail.value.textarea)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

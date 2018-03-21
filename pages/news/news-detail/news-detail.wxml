@@ -39,7 +39,7 @@
 
 <view class='write-comment'>
 <view class='button'>
-  <button class='writeButton'>写一个评论..</button>
+   <button class='writeButton'  bindtap="submit">写一个评论..</button> 
   </view>
   <view class='icon'>
       <view class='sumLove'>
@@ -52,3 +52,13 @@
       </view>
   </view>
 </view>
+
+ <textarea wx:if="{{showModal}}" show-confirm-bar="{{false}}" cursor-spacing="auto" fixed="true">测试</textarea>
+ <view class="mask" bindtap="go" wx:if="{{showModal}}"></view>
+
+<!-- <view class="modalDlg" wx:if="{{showModal}}"> -->
+    
+    <!-- <button bindtap="go">发送</button> -->
+<!-- </view> --> -->
+
+<!-- <button bindtap="submit">点我弹窗</button> 
