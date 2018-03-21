@@ -1,20 +1,30 @@
 <view class='new-container'>
-  <scroll-view scroll-y>
-    <swiper indicator-dots="true" autoplay="true" interval="{{interval}}" duration="{{duration}}" indicator-color="#FFFFFF" circular="ture">
-      <block wx:for="{{imgUrls}}">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </scroll-view>
-
-  <view class='news-category'>
+  <view class='new-top-body'>
+    <view class='new-top'>
+      <view class='new-day'>
+        <view>今日推荐</view>
+      </view>
+      <view class='search'>
+        <icon type='search' class='search-img' size='13' color='#405f80'></icon>
+        <input class='search-input' type='text' placeholder='4月1日春招' placeholder-class='placeholder' bindfocus='onBindFocus' bindchange="onBindChange"></input>
+      </view>
+    </view>
+    <scroll-view scroll-y>
+      <swiper indicator-dots="true" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#FFFFFF" circular="{{false}}">
+        <block wx:for="{{imgUrls}}">
+          <swiper-item>
+            <image src="{{item}}" class="slide-image" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </scroll-view>
+  </view>
+  <view class='news-category'catchtap="onNewsDetail">
     <text class='news-category-title'>- 话题 -</text>
     <view class='news-category-container'>
       <text class='news-category-content'>当你的好朋有有了更好的朋友，你应该怎么做？</text>
       <text class='news-category-form'>来自：表白菌</text>
-      <image src='{{imgUrls[3]}}' class='news-category-img'></image>
+      <image src='{{imgUrls[4]}}' class='news-category-img'></image>
       <text class='news-category-date'>今天 18：00</text>
     </view>
   </view>
@@ -24,17 +34,17 @@
     <view class='news-category-container'>
       <text class='news-category-content'>PLP 黑科大足球联赛即将开赛，你准备好了么？</text>
       <text class='news-category-form'>来自：足球协会</text>
-      <image src='{{imgUrls[4]}}' class='news-category-img'></image>
+      <image src='{{imgUrls[5]}}' class='news-category-img'></image>
       <text class='news-category-date'>今天 8：00</text>
     </view>
   </view>
 
-    <view class='news-category'>
+  <view class='news-category'>
     <text class='news-category-title'>- 咨询 -</text>
     <view class='news-category-container'>
       <text class='news-category-content'>四月三号，黑科大开始进行春招，一起来看看吧！</text>
       <text class='news-category-form'>来自：创新基地</text>
-      <image src='{{imgUrls[5]}}' class='news-category-img'></image>
+      <image src='{{imgUrls[3]}}' class='news-category-img'></image>
       <text class='news-category-date'>昨天 17：00</text>
     </view>
   </view>

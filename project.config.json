@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.93",
-	"appid": "wx7247cfc9c0b272b8",
-	"projectname": "potatos",
+	"appid": "wxf9acb97dd4744103",
+	"projectname": "potato%E9%98%94",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -54,6 +54,12 @@
 					"id": -1,
 					"name": "球员模板",
 					"pathName": "pages/tools/tools-game-today/tools-players-template/tools-players-template",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "信息详情",
+					"pathName": "pages/news/news-detail/news-detail",
 					"query": ""
 				}
 			]
