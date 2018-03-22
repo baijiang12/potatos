@@ -1,18 +1,30 @@
 <!--pages/tools/tools.wxml-->
 <import src="tools-template/tools-template.wxml" />
 <view class="tools-container">
-  <view >
+  <view>
     <view class="gameing">
-      <text >已开赛</text>
+      <text>已开赛</text>
     </view>
-      <template is="tools-template"/>
+
+    <block wx:for="{{matchList.match_list}}" wx:for-item="match">
+      <view wx:if="{{match.status==1}}" class="match-single">
+        <template is="tools-template" data="{{match}}" />
+      </view>
+    </block>
+
   </view>
 
   <view class="middle-ribbon"></view>
 
   <view class="notgame">
-    <text>未开赛</text>
-      <template is="tools-template"/>
+    <view>
+      <text>未开赛</text>
+    </view>
+    <block wx:for="{{matchList.match_list}}" wx:for-item="match">
+      <view wx:if="{{match.status==0}}" class="match-single">
+        <template is="tools-template" data="{{match}}" />
+      </view>
+    </block>
   </view>
-   
+
 </view>

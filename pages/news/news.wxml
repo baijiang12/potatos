@@ -24,7 +24,7 @@
     <view class='news-category-container'>
       <text class='news-category-content'>当你的好朋有有了更好的朋友，你应该怎么做？</text>
       <text class='news-category-form'>来自：表白菌</text>
-      <image src='{{imgUrls[4]}}' class='news-category-img'></image>
+      <image src='{{imgUrls[5]}}' class='news-category-img'></image>
       <text class='news-category-date'>今天 18：00</text>
     </view>
   </view>
@@ -34,7 +34,7 @@
     <view class='news-category-container'>
       <text class='news-category-content'>PLP 黑科大足球联赛即将开赛，你准备好了么？</text>
       <text class='news-category-form'>来自：足球协会</text>
-      <image src='{{imgUrls[5]}}' class='news-category-img'></image>
+      <image src='{{imgUrls[6]}}' class='news-category-img'></image>
       <text class='news-category-date'>今天 8：00</text>
     </view>
   </view>

@@ -2,9 +2,7 @@
   <template name="tools-template">  
 <view class="tools-template-container">
   <view class="top-module">
-      <template is="detail-template" />
-      <template is="detail-template" />
-      <template is="detail-template" />
+      <template is="detail-template" data="{{...match}}" />
   </view>
   
 </view>

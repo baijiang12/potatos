@@ -1,16 +1,12 @@
 {
   "pages": [
-    "pages/test/test",
     "pages/news/news",
     "pages/news/news-detail/news-detail",
     "pages/tasks/tasks",
     "pages/tools/tools",
     "pages/me/me",
-    "pages/tools/tools-template/tools-template",
-    "pages/tools/tools-template/tools-detail-template/tools-detail-template",
     "pages/tools/tools-game-today/tools-game-today",
-    "pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail",
-    "pages/tools/tools-game-today/tools-players-template/tools-players-template"
+    "pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

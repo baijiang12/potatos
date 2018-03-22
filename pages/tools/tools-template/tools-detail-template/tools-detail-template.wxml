@@ -1,10 +1,10 @@
-<template name="detail-template">   
+<template name="detail-template">
 <view class="detail-template-container" catchtap="sportDetail" data-sportid="2">
     <view class="detail-img">
-      <image class="detail-image" src="../../../../images/sports/20180318163823.png"></image>
+      <image class="detail-image" src="{{img}}"></image>
     </view>
     <view class="detail-text">
-      <text>篮球</text>
+      <text>{{title}}</text>
     </view>
 </view>
 </template>   

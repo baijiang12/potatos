@@ -6,7 +6,7 @@ Page({
    */
   data: {
     imgUrls: [
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521534040161&di=89294943dd6b8df81c3331f344194f52&imgtype=0&src=http%3A%2F%2Fbpic.ooopic.com%2F15%2F64%2F23%2F15642315-8423be90a53c3b3b4f44c44db84359a2-2.jpg',
+      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521719555166&di=ee7c68c038bc841c68ffd4804db2c411&imgtype=0&src=http%3A%2F%2Fbpic.ooopic.com%2F16%2F45%2F96%2F16459635-b7e08c4f1d9ab542afa23e54f8b6a217-3.jpg',
       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521473355301&di=6dc5dceaae35bb9485a586a0e2751711&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01f402565e5b5032f875ae3401ed18.png',
       'http://image.wufazhuce.com/Fv7sIjdPR0CceEDIZ4wd62jWAhTU',
       'http://image.wufazhuce.com/FstbIkUvTiKbCRpGoeqvk_fQKgio',

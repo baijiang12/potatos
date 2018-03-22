@@ -9,7 +9,7 @@
      /* border: 1px solid;  */
    width: 750rpx;
   height: 55rpx;
-  background: #eeeeee;
+  background: #f2f2f2;
 }
 .gameing{
   text-align: center;
@@ -18,4 +18,11 @@
 .notgame{
   text-align: center;
   margin-top: 35rpx;
+}
+/* .matchlist{
+  display: flex;
+  flex-direction: row;
+} */
+.match-single{
+  float: left;
 }
