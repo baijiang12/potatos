@@ -61,6 +61,12 @@
 					"name": "信息详情",
 					"pathName": "pages/news/news-detail/news-detail",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "test",
+					"pathName": "pages/test/test",
+					"query": ""
 				}
 			]
 		}

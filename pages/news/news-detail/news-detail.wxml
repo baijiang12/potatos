@@ -6,7 +6,7 @@
     <text class="const-text">发表于</text>
     <text class="date">今天18：00</text>
   </view>
-  <text class="title">当你的好朋有有了更好的朋友，你应该怎么做？</text>
+  <text class="new-title">当你的好朋有有了更好的朋友，你应该怎么做？</text>
   <view class="horizon"></view>
   <text class="detail">菊黄蟹正肥，品尝秋之味。徐志摩把“看初花的荻芦”和“到楼外楼吃蟹”并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，壳凸红脂块块香”；在《世说新语》里，晋毕卓更是感叹“右手持酒杯，左手持蟹螯，拍浮酒船中，便足了一生矣。”漫漫人生长路，美食与爱岂可辜负？于是作为一个吃货，突然也很想回味一下属于我的味蕾记忆。记忆中的秋蟹，是家人的味道，弥漫着浓浓的亲情。\n\n是谁来自山川湖海，却囿于昼夜，厨房与爱？ 是母亲，深思熟虑，聪明耐心。吃蟹前，总会拿出几件工具，煞有介事而乐此不疲。告诉我们螃蟹至寒，需要佐以姜茶以祛寒，在配备的米醋小碟里，亦添入姜丝与紫苏，前者驱寒后者增香。泡好菊花茶，岁月静好，我们静等。"</text>
   <view class='comment'>
@@ -38,27 +38,32 @@
 </view>
 
 <view class='write-comment'>
-<view class='button'>
-   <button class='writeButton'  bindtap="submit">写一个评论..</button> 
+  <view class='button'>
+    <button class='writeButton' bindtap="powerDrawer" data-statu="open">写一个评论..</button>
   </view>
   <view class='icon'>
-      <view class='sumLove'>
-        <image class='sumLove-img' src='/images/common/heart.png'></image>
-        <text class='sumLove-text'>407</text>
-      </view>
-      <view class='sunCom'>
-        <image class='sumCom-img' src='/images/common/comment.png'></image>
-        <text class='sumCom-text'>98</text>
-      </view>
+    <view class='sumLove'>
+      <image class='sumLove-img' src='/images/common/heart.png'></image>
+      <text class='sumLove-text'>407</text>
+    </view>
+    <view class='sunCom'>
+      <image class='sumCom-img' src='/images/common/comment.png'></image>
+      <text class='sumCom-text'>98</text>
+    </view>
   </view>
 </view>
+<view class="b1" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
 
- <textarea wx:if="{{showModal}}" show-confirm-bar="{{false}}" cursor-spacing="auto" fixed="true">测试</textarea>
- <view class="mask" bindtap="go" wx:if="{{showModal}}"></view>
-
-<!-- <view class="modalDlg" wx:if="{{showModal}}"> -->
-    
-    <!-- <button bindtap="go">发送</button> -->
-<!-- </view> --> -->
-
-<!-- <button bindtap="submit">点我弹窗</button> 
+  <!--drawer content-->
+  <view class="drawer_title">请留下你的评论</view>
+  <view class="drawer_content">
+    <form bindsubmit="bindFormSubmit">
+      <textarea class='drawer_textarea' selection-start="1" auto-focus="{{true}}" show-confirm-bar="{{false}}" name="textarea" value='{{info}}'></textarea>
+      <view class='btn_sum'>
+        <button class='drawer_btn' bindtap="powerDrawer" data-statu="close"> 取消 </button>
+        <button class='drawer_btn' form-type="submit" bindtap="powerDrawer" data-statu="close"> 提交 </button>
+      </view>
+    </form>
+  </view>
+</view>
