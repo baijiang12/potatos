@@ -1,4 +1,6 @@
 <!--pages/tools/tools-game-today/tools-game-today.wxml-->
+<import src="./tools-matchVS-template/tools-matchVS-template.wxml" />
+<import src="./tools-matchVS-template/tools-matchDate-template/tools-matchDate-template.wxml" />
 <view class='match-top'>
   <view class='follow'>
     <image class='fol-img' src='/images/common/guanzhu.png'></image>
@@ -7,40 +9,22 @@
     - 下拉加载往日赛事 -
   </view>
 </view>
+<block wx:for="">
+  <template is="matchDateTemplate" />
+  <block wx:for="">
+    <template is="matchVSTemplate" />
+  </block>
+</block>
 
-<view class='day'>
+
+
+<!-- <view class='day'>
   <view class="horizon"></view>
   <text class='date'>3月24日</text>
   <view class="horizon"></view>
 </view>
-<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
-  <view class="team-view">
-    <image src="/images/team/安全.png"></image>
-    <text class='team-name'>安全</text>
-  </view>
-  <view class="text-middle-view">
-    <view class='match-list-status'>
-      <view class='match-name'>一轮赛</view>
-      <view class='match-status'>未开赛</view>
-    </view>
-    <view class='match-info'>
-    <view class='vs'>VS</view>
-    <view>/</view>
-    <view>
-      <view class='match-area'>田径场</view>
-      <view class='match-date'>12:28</view>
-    </view>
-    </view>
 
-  </view>
-  <view class="team2-view">
-    <image src="/images/team/计算机3.png"></image>
-    <text class='team-name'>计算机</text>
-  </view>
-</view>
-
-
-<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
+ <view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
   <view class="team-view">
     <image src="/images/team/管理.png"></image>
     <text class='team-name'>管理</text>
@@ -150,5 +134,30 @@
   </view>
 </view>
 
+<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
+  <view class="team-view">
+    <image src="/images/team/安全.png"></image>
+    <text class='team-name'>安全</text>
+  </view>
+  <view class="text-middle-view">
+    <view class='match-list-status'>
+      <view class='match-name'>一轮赛</view>
+      <view class='match-status'>未开赛</view>
+    </view>
+    <view class='match-info'>
+    <view class='vs'>VS</view>
+    <view>/</view>
+    <view>
+      <view class='match-area'>田径场</view>
+      <view class='match-date'>12:28</view>
+    </view>
+    </view>
 
-
+  </view>
+  <view class="team2-view">
+    <image src="/images/team/计算机3.png"></image>
+    <text class='team-name'>计算机</text>
+  </view>
+</view>
+  
+   -->

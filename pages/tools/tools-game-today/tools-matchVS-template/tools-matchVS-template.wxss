@@ -1,0 +1,36 @@
+@import  './tools-matchStatus-template/tools-matchStatus-template.wxss';
+
+.tools-game-today-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15rpx;
+  margin-bottom: 60rpx;
+}
+
+.team-view {
+  display: flex;
+  flex-direction: column;
+  width: 175rpx;
+  align-items: center;
+  margin-right: 50rpx;
+}
+
+.team2-view {
+  display: flex;
+  flex-direction: column;
+  width: 175rpx;
+  align-items: center;
+  /* margin-right: 40rpx; *//* border-radius: 5rpx; *//* border: 1px solid; */
+}
+
+image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.team-name {
+  font-size: 37rpx;
+  color: #4b556c;
+  font-weight: 700;
+}
+

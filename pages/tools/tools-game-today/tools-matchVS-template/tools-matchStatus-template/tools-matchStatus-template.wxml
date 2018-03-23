@@ -1,0 +1,54 @@
+<template name="matchStatus">
+  <view wx:if="{{status==0}}">
+    <view class="text-middle-view">
+      <view class='match-list-status'>
+        <view class='match-name'>一轮赛</view>
+        <view class='match-status'>未开赛</view>
+      </view>
+      <view class='match-info'>
+        <view class='vs'>VS</view>
+        <view>/</view>
+        <view>
+          <view class='match-area'>田径场</view>
+          <view class='match-date'>12:28</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{status==1}}">
+    <view class="text-middle-view">
+      <view class='match-list-status'>
+        <view class='match-name'>一轮赛</view>
+        <view class='match-status-1'>已结束</view>
+      </view>
+      <view class='match-info'>
+        <view class='vs'>2</view>
+        <view class='maohao'>：</view>
+        <view>
+          <view class='vs1'>0</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+
+  <view wx:else>
+    <view class="text-middle-view">
+      <view class='match-list-status'>
+        <view class='match-name'>一轮赛</view>
+        <view class='match-status-1'>进行中</view>
+      </view>
+      <view class='match-info'>
+        <view class='vs'>VS</view>
+        <view>/</view>
+        <view>
+          <view class='match-area'>田径场</view>
+          <view class='match-date'>12:28</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</template>
