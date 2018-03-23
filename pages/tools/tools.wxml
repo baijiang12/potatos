@@ -21,7 +21,7 @@
       <text>未开赛</text>
     </view>
     <block wx:for="{{matchList.match_list}}" wx:for-item="match">
-      <view wx:if="{{match.status==0}}" class="match-single">
+      <view wx:if="{{match.status==0}}" class="match-single" >
         <template is="tools-template" data="{{match}}" />
       </view>
     </block>

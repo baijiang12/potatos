@@ -20,9 +20,19 @@ Page({
   },
   sportDetail:function(event) { 
     console.log(event.currentTarget.dataset.sportid);
-    wx.navigateTo({
-      url: "tools-game-today/tools-game-today",
-    })
+    var matchStatus = event.currentTarget.dataset.status;
+    if(matchStatus==0){
+      wx.showToast({
+        title: '比赛筹划中',
+        icon: 'none',
+        duration: 2000
+      })
+    }else{
+      wx.navigateTo({
+        url: "tools-game-today/tools-game-today",
+      })
+    }
+ 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -2,7 +2,7 @@ var local_database = [
   {
     matchId : 1,
     title : '足球',
-    img : "/images/sports/football1.png",
+    img : "/images/sports/www.gif",
     status : 1
   },
   {
