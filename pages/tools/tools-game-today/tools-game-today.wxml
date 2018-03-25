@@ -18,12 +18,39 @@
 
 
 
-<!-- <view class='day'>
+<view class='day'>
   <view class="horizon"></view>
   <text class='date'>3月24日</text>
   <view class="horizon"></view>
 </view>
 
+<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
+  <view class="team-view">
+    <image src="/images/team/安全.png"></image>
+    <text class='team-name'>安全</text>
+  </view>
+  <view class="text-middle-view">
+    <view class='match-list-status'>
+      <view class='match-name'>一轮赛</view>
+      <view class='match-status'>未开赛</view>
+    </view>
+    <view class='match-info'>
+    <view class='vs'>VS</view>
+    <view>/</view>
+    <view>
+      <view class='match-area'>田径场</view>
+      <view class='match-date'>12:28</view>
+    </view>
+    </view>
+
+  </view>
+  <view class="team2-view">
+    <image src="/images/team/计算机3.png"></image>
+    <text class='team-name'>计算机</text>
+  </view>
+</view>
+  
+  
  <view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
   <view class="team-view">
     <image src="/images/team/管理.png"></image>
@@ -50,31 +77,6 @@
   </view>
 </view>
 
-<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
-  <view class="team-view">
-    <image src="/images/team/机械.png"></image>
-    <text class='team-name'>机械</text>
-  </view>
-  <view class="text-middle-view">
-    <view class='match-list-status'>
-      <view class='match-name'>一轮赛</view>
-      <view class='match-status-1'>进行中</view>
-    </view>
-    <view class='match-info'>
-    <view class='vs'>VS</view>
-    <view>/</view>
-    <view>
-      <view class='match-area'>田径场</view>
-      <view class='match-date'>12:28</view>
-    </view>
-    </view>
-
-  </view>
-  <view class="team2-view">
-    <image src="/images/team/材料.png"></image>
-    <text class='team-name'>材料</text>
-  </view>
-</view>
 
 
 <view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
@@ -110,13 +112,13 @@
 </view>
 <view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
   <view class="team-view">
-    <image src="/images/team/安全.png"></image>
-    <text class='team-name'>安全</text>
+    <image src="/images/team/机械.png"></image>
+    <text class='team-name'>机械</text>
   </view>
   <view class="text-middle-view">
     <view class='match-list-status'>
       <view class='match-name'>一轮赛</view>
-      <view class='match-status'>未开赛</view>
+      <view class='match-status-1'>进行中</view>
     </view>
     <view class='match-info'>
     <view class='vs'>VS</view>
@@ -129,35 +131,7 @@
 
   </view>
   <view class="team2-view">
-    <image src="/images/team/计算机3.png"></image>
-    <text class='team-name'>计算机</text>
+    <image src="/images/team/材料.png"></image>
+    <text class='team-name'>材料</text>
   </view>
 </view>
-
-<view class="tools-game-today-container" catchtap="onGameDetailTap" data-game-id="5">
-  <view class="team-view">
-    <image src="/images/team/安全.png"></image>
-    <text class='team-name'>安全</text>
-  </view>
-  <view class="text-middle-view">
-    <view class='match-list-status'>
-      <view class='match-name'>一轮赛</view>
-      <view class='match-status'>未开赛</view>
-    </view>
-    <view class='match-info'>
-    <view class='vs'>VS</view>
-    <view>/</view>
-    <view>
-      <view class='match-area'>田径场</view>
-      <view class='match-date'>12:28</view>
-    </view>
-    </view>
-
-  </view>
-  <view class="team2-view">
-    <image src="/images/team/计算机3.png"></image>
-    <text class='team-name'>计算机</text>
-  </view>
-</view>
-  
-   -->

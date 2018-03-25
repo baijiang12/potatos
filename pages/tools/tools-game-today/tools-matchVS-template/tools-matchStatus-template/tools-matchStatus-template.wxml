@@ -38,7 +38,7 @@
     <view class="text-middle-view">
       <view class='match-list-status'>
         <view class='match-name'>一轮赛</view>
-        <view class='match-status-1'>进行中</view>
+        <view class='match-status-1'>未开赛</view>
       </view>
       <view class='match-info'>
         <view class='vs'>VS</view>
