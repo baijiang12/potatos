@@ -5,24 +5,188 @@ Page({
    * 页面的初始数据
    */
   data: {
-      theTab:'left',
-      info: '',
-      showModalStatus: false,
+    theTab: 'left',
+    info: '',
+    showModalStatus: false,
+    thisGame: {},
+    addcomments: {},
+    CommentSupport: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+
+    // 球队支持缓存(点赞)
+    //获取当前比赛场次id
+    var gameId = JSON.parse(options.list).gameid;
+    var team1Id = JSON.parse(options.list).teamidone;
+    var team2Id = JSON.parse(options.list).teamidtwo;
+    //当前比赛场次+某个球队
+    var supportid1 = gameId + '' + team1Id;
+    var supportid2 = gameId + '' + team2Id;
+    this.setData({
+      supportid1: supportid1,
+      supportid2: supportid2
+    })
+    var gamesSupport = wx.getStorageSync('game_support');
+    //判断是否有缓存
+    if (gamesSupport) {
+      var gameSupport1 = gamesSupport[supportid1];
+      var gameSupport2 = gamesSupport[supportid2];
+      //判断此比赛是否有缓存
+      if (gameSupport1 != null && gameSupport2 != null) {
+        that.setData({
+          Supported1: gameSupport1,
+          Supported2: gameSupport2
+        })
+      } else {
+        gamesSupport[supportid1] = false;
+        gamesSupport[supportid2] = false;
+        var gameSupport1 = gamesSupport[supportid1];
+        var gameSupport2 = gamesSupport[supportid2];
+        that.setData({
+          Supported1: gameSupport1,
+          Supported2: gameSupport2
+        })
+        wx.setStorageSync('game_support', gamesSupport);
+      }
+    } else {
+      var gamesSupport = {};
+      gamesSupport[supportid1] = false;
+      gamesSupport[supportid2] = false;
+      var gameSupport1 = gamesSupport[supportid1];
+      var gameSupport2 = gamesSupport[supportid2];
+      that.setData({
+        Supported1: gameSupport1,
+        Supported2: gameSupport2
+      })
+      wx.setStorageSync('game_support', gamesSupport);
+    }
+    // 发送比赛详情请求
+    wx.request({
+      url: "http://47.95.4.127:8080/HeiKeOnline/games/" + gameId + ".do",
+      method: 'GET',
+      data: {
+        offset: 0,
+        limit: 5
+      },
+      header: {
+        "Content-type": "application/json"
+      },
+      success: function (res) {
+        var support1 = (res.data.team1likecount / (res.data.team1likecount + res.data.team2likecount)).toFixed(2);
+        var support2 = (res.data.team2likecount / (res.data.team1likecount + res.data.team2likecount)).toFixed(2);
+        res.data.team1likecount = support1 * 10 * 10;
+        res.data.team2likecount = support2 * 10 * 10;
+
+        that.setData({
+          thisGame: res.data
+        });
+        var thisgamecomments = that.data.thisGame.comments;
+        var thiscommentsupportid = that.data.thisGame.comments[0].gameId + '' + that.data.thisGame.comments[0].id;
+        // 评论缓存  
+        // 设置每条评论的唯一标识符
+        // 定义此页面的每个评论的缓存
+        var commentsupportid = {};
+        for (var i = 0; i < Object.keys(thisgamecomments).length; i++) {
+          commentsupportid[i] = gameId + '' + thisgamecomments[i].id;
+        }
+        // // 是否有比赛的评论缓存
+        var commentssupport = wx.getStorageSync('game_comments_support');
+        if (commentssupport) {
+          var commentsupport = {};
+          for (var i = 0; i < Object.keys(thisgamecomments).length; i++) {
+            commentsupport[i] = commentssupport[commentsupportid[i]];
+          }
+          // 判断此页面的评论是否添加到缓存
+          if (commentssupport[thiscommentsupportid] != null) {
+            that.setData({
+              commentssupport
+            })
+          } else {
+            for (var i = 0; i < Object.keys(thisgamecomments).length; i++) {
+              commentssupport[commentsupportid[i]] = false;
+              wx.setStorageSync('game_comments_support', commentssupport)
+            }
+            that.setData({
+              commentssupport
+            })
+          }
+        } else {
+          // 添加缓存
+          var commentssupport = {};
+
+          for (var i = 0; i < Object.keys(thisgamecomments).length; i++) {
+            commentssupport[commentsupportid[i]] = false;
+            wx.setStorageSync('game_comments_support', commentssupport)
+          }
+          that.setData({
+            commentssupport
+          })
+
+        }
+      },
+      fail: function (error) {
+        console.log(error);
+      }
+    });
+
   },
+  //评论功能  追加评论
   bindFormSubmit: function (e) {
     var textareaContent = e.detail.value.textarea;
-    textareaContent = '';
+    var gameId = this.data.thisGame.id;
+    var that = this;
     this.setData({
       info: ''
+    });
+    wx.request({
+      url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments.do',
+      method: 'POST',
+      data: {
+        "gameId": gameId,
+        "userId": 1001,
+        "content": textareaContent,
+        "likecount": 0
+      },
+      header: {
+        "Content-type": "application/json"
+      },
+      success: function (res) {
+        if (res.data.status == 0) {
+          wx.hideToast()
+          wx.showToast({
+            title: '不能含有敏感词汇',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.hideToast();
+          that.setData({
+            addcomments: res.data
+          });
+          wx.showToast({
+            title: '评论成功',
+            icon: 'none',
+            duration: 2000
+          });
+        }
+        console.log(res);
+      },
+      fail: function () {
+
+      }
+    });
+    wx.showToast({
+      icon: 'loading',
+      duration: 6000
     })
+
   },
+
   powerDrawer: function (e) {
     var currentStatu = e.currentTarget.dataset.statu;
     this.util(currentStatu)
@@ -75,18 +239,128 @@ Page({
       );
     }
   },
-  switchTab:function(event){
-    if(event.currentTarget.dataset.lor != this.data.theTab){
-      if (this.data.theTab == 'left'){
+  //标签切换
+  switchTabs: function (event) {
+    if (event.currentTarget.dataset.lor != this.data.theTab) {
+      if (this.data.theTab == 'left') {
         this.setData({
           theTab: 'right'
         })
-      }else{
+      } else {
         this.setData({
           theTab: 'left'
         })
       }
     }
-    console.log(this.data.theTab);
-  }
+  },
+
+  //球队点赞事件
+  gameSupport: function (event) {
+    //判断是左右点击
+    var that = this;
+    if (event.currentTarget.dataset.teamid == 'support1') {
+      if (!this.data.Supported2) {
+        var gamesSupport = wx.getStorageSync('game_support');
+        var Supported1 = !this.data.Supported1;
+        gamesSupport[that.data.supportid1] = Supported1;
+        wx.setStorageSync('game_support', gamesSupport);
+        that.setData({
+          Supported1: Supported1
+        })
+        var count = Supported1 ? 1 : -1
+        wx.request({
+          url: 'http://47.95.4.127:8080/HeiKeOnline/games/addSupport/' + this.data.thisGame.id + '.do',
+          method: 'PUT',
+          data: {
+            "gameId": this.data.thisGame.id,
+            "support": 'team1likecount',
+            "count": count
+          },
+          header: {
+            "Content-type": "application/json"
+          },
+          success: function () { },
+          fail: function () {
+
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '只可支持一个球队',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    } else {
+      if (!this.data.Supported1) {
+        var gamesSupport = wx.getStorageSync('game_support');
+        var Supported2 = !this.data.Supported2;
+        gamesSupport[that.data.supportid2] = Supported2;
+        wx.setStorageSync('game_support', gamesSupport);
+        that.setData({
+          Supported2: Supported2
+        })
+        var count = Supported2 ? 1 : -1
+        wx.request({
+          url: 'http://47.95.4.127:8080/HeiKeOnline/games/addSupport/' + this.data.thisGame.id + '.do',
+          method: 'PUT',
+          data: {
+            "gameId": this.data.thisGame.id,
+            "support": 'team2likecount',
+            "count": count
+          },
+          header: {
+            "Content-type": "application/json"
+          },
+          success: function () { },
+          fail: function () {
+
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '只可支持一个球队',
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    }
+  },
+
+  //评论点赞 
+  commentSupport: function (event) {
+    var that = this;
+    var commentId = event.currentTarget.dataset.commentid;
+    var gameId = event.currentTarget.dataset.gameid;
+    var thiscommentsupportid = gameId + '' + commentId;
+    // 获取comments对象
+    var thisgamecomments = this.data.thisGame.comments;
+    // 评论缓存  
+    
+    var commentssupport = wx.getStorageSync('game_comments_support');
+    commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
+    wx.setStorageSync('game_comments_support', commentssupport)
+    that.setData({
+      commentssupport
+    })
+    
+    var count = commentssupport[thiscommentsupportid] ? 1:-1
+    
+    // wx.request({
+    //   url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments/addlike/' + commentId+'.do',
+    //   data:{
+    //     gameId: gameId,
+    //     id:commentId
+    //   },
+    //   method:'PUT',
+    //   header: {
+    //     "Content-type": "application/json"
+    //   },
+    //   success:function(res){
+    //     // 数据绑定,设置缓存
+    //   }
+
+    // })
+  },
+
 })

@@ -6,7 +6,7 @@
       <text>已开赛</text>
     </view>
 
-    <block wx:for="{{matchList.match_list}}" wx:for-item="match">
+    <block wx:for="{{matchList.match_list}}" wx:for-item="match" wx:key="key">
       <view wx:if="{{match.status==1}}" class="match-single">
         <template is="tools-template" data="{{match}}" />
       </view>
@@ -20,7 +20,7 @@
     <view>
       <text>未开赛</text>
     </view>
-    <block wx:for="{{matchList.match_list}}" wx:for-item="match">
+    <block wx:for="{{matchList.match_list}}" wx:for-item="match" wx:key="key">
       <view wx:if="{{match.status==0}}" class="match-single" >
         <template is="tools-template" data="{{match}}" />
       </view>

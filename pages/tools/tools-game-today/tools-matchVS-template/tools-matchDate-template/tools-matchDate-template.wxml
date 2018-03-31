@@ -1,7 +1,0 @@
-<template name="matchDateTemplate">
-  <view class='day'>
-    <view class="horizon"></view>
-    <text class='date'>3月24日</text>
-    <view class="horizon"></view>
-  </view>
-</template>

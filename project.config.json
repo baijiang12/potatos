@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -30,42 +30,12 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
-					"name": "今日比赛",
+					"name": "比赛",
 					"pathName": "pages/tools/tools-game-today/tools-game-today",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "工具",
-					"pathName": "pages/tools/tools",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "比赛详情",
-					"pathName": "pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "球员模板",
-					"pathName": "pages/tools/tools-game-today/tools-players-template/tools-players-template",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "信息详情",
-					"pathName": "pages/news/news-detail/news-detail",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "test",
-					"pathName": "pages/test/test",
 					"query": ""
 				}
 			]

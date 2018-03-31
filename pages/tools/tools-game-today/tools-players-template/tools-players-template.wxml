@@ -1,10 +1,10 @@
 <template name="players-template">
 <view class="players-template-container">
-  <view class="players-image"><image src="../../../../images/players/meixi.png"></image></view>
+  <view class="players-image"><image src="{{icon}}"></image></view>
   <view class="plsyers-message">
-    <text>姓名:刘晓飞</text>
-    <text>年龄:72</text>
-    <text>位置:老前锋</text>
+    <text>姓名:{{name}}</text>
+    <text>生日:{{brithday}}</text>
+    <text>位置:{{position}}</text>
   </view>
 </view>
 </template>

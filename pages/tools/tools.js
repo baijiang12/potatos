@@ -13,13 +13,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      console.log(matchList);
+      // console.log(matchList);
       this.setData({
         matchList: matchList
       });
   },
   sportDetail:function(event) { 
-    console.log(event.currentTarget.dataset.sportid);
+    // console.log(event.currentTarget.dataset.sportid);
     var matchStatus = event.currentTarget.dataset.status;
     if(matchStatus==0){
       wx.showToast({

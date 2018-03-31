@@ -1,5 +1,4 @@
-@import "./tools-matchVS-template/tools-matchVS-template.wxss";
-@import "./tools-matchVS-template/tools-matchDate-template/tools-matchDate-template.wxss";
+ @import "tools-matchDate-template/tools-matchDate-template.wxss"; 
 .match-top {
   width: 100%;
   height: 76rpx;

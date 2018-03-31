@@ -17,6 +17,6 @@
 .plsyers-message{
   display: flex;
   flex-direction: column;
-  font-size: 30rpx;
+  font-size: 28rpx;
   margin-left: 15rpx;
 }
