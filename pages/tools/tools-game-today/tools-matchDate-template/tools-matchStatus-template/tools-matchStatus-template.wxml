@@ -1,0 +1,51 @@
+<import src="tools-matchVS-template/tools-matchVS-template.wxml" />
+<template name="matchStatus">
+  <view class="tools-game-today-container"  catchtap="onGameDetailTap" data-gameid="{{id}}" data-teamidone="{{team1.id}}" data-teamidtwo="{{team2.id}}">
+  
+    <view class="team-view">
+      <template is="matchVSTemplate"  data="{{...team1}}"/>
+    </view>
+
+    <view class="text-middle-view">
+      <view class='match-list-status'>
+        <view class='match-name'>{{name}}</view>
+        <view class='match-status'>{{status}}</view>
+      </view>
+      <view class='match-info'>
+        <view class='vs'>
+          <!-- <image src="../../../../../images/common/vs.png"></image> -->
+          vs
+        </view>
+        <view>/</view>
+        <view>
+          <view class='match-area'>{{location}}</view>
+          <view class='match-date'>12:38</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="team2-view">
+      <template is="matchVSTemplate" data="{{...team2}}"/>
+    </view>
+
+  </view>
+</template>
+
+  <!-- <view wx:elif="{{status==1}}">
+    <view class="text-middle-view">
+      <view class='match-list-status'>
+        <view class='match-name'>一轮赛</view>
+        <view class='match-status-1'>已结束</view>
+      </view>
+      <view class='match-info'>
+        <view class='vs'>2</view>
+        <view class='maohao'>：</view>
+        <view>
+          <view class='vs1'>0</view>
+        </view>
+      </view>
+
+    </view>
+
+  </view> -->
+<!-- </template> -->
