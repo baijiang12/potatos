@@ -86,7 +86,11 @@ Page({
           thisGame: res.data
         });
         var thisgamecomments = that.data.thisGame.comments;
-        var thiscommentsupportid = that.data.thisGame.comments[0].gameId + '' + that.data.thisGame.comments[0].id;
+        if (JSON.stringify(that.data.thisGame.comments) !='[]'){
+          var thiscommentsupportid = that.data.thisGame.comments[0].gameId + '' + that.data.thisGame.comments[0].id;
+        }else{
+          var thiscommentsupportid = 0;
+        }
         // 评论缓存  
         // 设置每条评论的唯一标识符
         // 定义此页面的每个评论的缓存
@@ -143,17 +147,18 @@ Page({
     this.setData({
       info: ''
     });
+    var thisdata = {
+      "gameId": gameId,
+      "userId": 1001,
+      "content": textareaContent,
+      "likecount": 0
+    };
     wx.request({
       url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments.do',
       method: 'POST',
-      data: {
-        "gameId": gameId,
-        "userId": 1001,
-        "content": textareaContent,
-        "likecount": 0
-      },
+      data: JSON.stringify(thisdata),
       header: {
-        "Content-type": "application/json"
+        "Content-Type": "application/json"
       },
       success: function (res) {
         if (res.data.status == 0) {
@@ -174,7 +179,6 @@ Page({
             duration: 2000
           });
         }
-        console.log(res);
       },
       fail: function () {
 
@@ -346,21 +350,33 @@ Page({
     
     var count = commentssupport[thiscommentsupportid] ? 1:-1
     
-    // wx.request({
-    //   url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments/addlike/' + commentId+'.do',
-    //   data:{
-    //     gameId: gameId,
-    //     id:commentId
-    //   },
-    //   method:'PUT',
-    //   header: {
-    //     "Content-type": "application/json"
-    //   },
-    //   success:function(res){
-    //     // 数据绑定,设置缓存
-    //   }
+    console.log(count)
+    var thisgamecomments = that.data.thisGame;
+    for (var i = 0; i < Object.keys(thisgamecomments.comments).length;i++){
+      if (thisgamecomments.comments[i].id == commentId){
+        thisgamecomments.comments[i].likecount = thisgamecomments.comments[i].likecount + count;
+        that.setData({
+          thisGame: thisgamecomments
+        })
+      } 
+    }
 
-    // })
+    wx.request({
+      url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments/addlike/' + commentId+'.do',
+      data:{
+        gameId: gameId,
+        id:commentId,
+        count:count
+      },
+      method:'PUT',
+      header: {
+        "Content-type": "application/json"
+      },
+      success:function(res){
+        // 数据绑定,设置缓存
+      }
+
+    })
   },
 
 })

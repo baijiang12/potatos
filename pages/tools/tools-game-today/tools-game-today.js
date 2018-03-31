@@ -27,7 +27,6 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
-        // console.log(res.data)
         that.setData({
           todayGame: res.data
         })
@@ -58,7 +57,7 @@ Page({
       data: {
         offset: 0,
         limit: 10,
-        current: '2018-03-25',
+        current: '2018-03-29',
         direction: '<'
       },
       header: {
@@ -66,15 +65,23 @@ Page({
       },
       success: function (res) {
         // 将新获取到的比赛追加到前面 
-        var temp = res.data.reverse();
-        var former = that.data.todayGame;
-        var lenformer = Object.keys(temp).length;
-        for (var i = 0; i < Object.keys(former).length;i++){
-          temp[lenformer + i] = former[i];
+        if(res.data){
+          var temp = res.data.reverse();
+          var former = that.data.todayGame;
+          var lenformer = Object.keys(temp).length;
+          for (var i = 0; i < Object.keys(former).length; i++) {
+            temp[lenformer + i] = former[i];
+          }
+          that.setData({
+            todayGame: temp
+          })
+        }else{
+          wx.showToast({
+            title: '无更多赛事',
+            icon:none,
+            duration:1000
+          })
         }
-        that.setData({
-          todayGame: temp
-        })
       },
       fail: function (error) {
         console.log(error)
