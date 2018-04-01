@@ -6,12 +6,12 @@
     <template is="matchStatus" data="{{...thisGame}}" />
 
     <view class='supportlv'>
-      <view class='sup-numL'>{{thisGame.team1likecount}}%</view>
-      <view class='sup-numR'>{{thisGame.team2likecount}}%</view>
+      <view class='sup-numL'>{{thisGame.team1likecounts}}%</view>
+      <view class='sup-numR'>{{thisGame.team2likecounts}}%</view>
     </view>
     <view class='support'>
       <image class='supportL' data-teamid="support1" catchtap="gameSupport" src="{{Supported1?'/images/common/HsupportL.png':'/images/common/supportL.png'}}"></image>
-      <progress percent="{{thisGame.team1likecount}}" stroke-width="3" activeColor="	#F75000" backgroundColor="#484891" />
+      <progress percent="{{thisGame.team1likecounts}}" stroke-width="3" activeColor="	#F75000" backgroundColor="#484891" />
       <image class='supportR' data-teamid="support2" catchtap="gameSupport" src="{{Supported2?'/images/common/HsupportR.png':'/images/common/supportR.png'}}"></image>
     </view>
     <view class='judgemnt'>
@@ -59,11 +59,11 @@
               <view class='user-data'>
                 <image class="user-img" src="{{addcomments.user.icon}}"></image>
                 <text class="username">{{addcomments.user.name}}</text>
-                <text class="comment-date">今天18：00</text>
+                <text class="comment-date">{{addcomments.time}}</text>
               </view>
               <text class="comment-content">{{addcomments.content}}</text>
               <view class='love'>
-                <image class='love-img' src='/images/common/zan.png'></image>
+                <image catchtap="commentSupport" data-commentId="{{addcomments.id}}" data-add="true" data-gameId="{{addcomments.gameId}}"  class='love-img' src="{{commentssupport[(addcomments.gameId+''+addcomments.id)] ?'/images/common/HsupportL.png'  : '/images/common/zan.png'}}"></image>
                 <text class='love-num'>{{addcomments.likecount}}</text>
               </view>
             </view>
@@ -74,7 +74,7 @@
             <view class='user-data'>
               <image class="user-img" src="{{thisComment.user.icon}}"></image>
               <text class="username">{{thisComment.user.name}}</text>
-              <text class="comment-date">今天18：00</text>
+              <text class="comment-date">{{thisComment.time}}</text>
             </view>
             <text class="comment-content">{{thisComment.content}}</text>
             <view class='love'>

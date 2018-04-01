@@ -20,7 +20,7 @@ Page({
       data: {
         offset: 0,
         limit: 10,
-        current: '2018-03-25',
+        current: '',
         direction: '>'
       },
       header: {
@@ -53,19 +53,19 @@ Page({
     // current 应该设置一个缓存,需将天数累加
     wx.request({
       url: 'http://47.95.4.127:8080/HeiKeOnline/games/list.do',
-      method:'POST',
+      method: 'POST',
       data: {
         offset: 0,
         limit: 10,
         current: '2018-03-29',
-        direction: '<'
+        direction: '>'
       },
       header: {
         "Content-type": "application/json"
       },
       success: function (res) {
         // 将新获取到的比赛追加到前面 
-        if(res.data){
+        if (res.data) {
           var temp = res.data.reverse();
           var former = that.data.todayGame;
           var lenformer = Object.keys(temp).length;
@@ -75,11 +75,11 @@ Page({
           that.setData({
             todayGame: temp
           })
-        }else{
+        } else {
           wx.showToast({
             title: '无更多赛事',
-            icon:none,
-            duration:1000
+            icon: none,
+            duration: 1000
           })
         }
       },

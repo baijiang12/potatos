@@ -1,4 +1,4 @@
 <template name="matchVSTemplate">
     <image src="{{log}}"></image>
-    <text class='team-name'>{{belongs}}</text>
+    <text class='team-name'>{{name}}</text>
 </template>

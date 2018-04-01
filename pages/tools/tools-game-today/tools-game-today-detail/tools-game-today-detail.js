@@ -1,4 +1,4 @@
-// pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail.js
+var util = require('../../../../utils/util.js');
 Page({
 
   /**
@@ -77,18 +77,24 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
-        var support1 = (res.data.team1likecount / (res.data.team1likecount + res.data.team2likecount)).toFixed(2);
-        var support2 = (res.data.team2likecount / (res.data.team1likecount + res.data.team2likecount)).toFixed(2);
-        res.data.team1likecount = support1 * 10 * 10;
-        res.data.team2likecount = support2 * 10 * 10;
 
+        // 将时间戳转换为正常时间格式
+        var thisgamecomment = res.data.comments;
+        for (var i = 0; i < Object.keys(thisgamecomment).length; i++) {
+          res.data.comments[i].time = util.getDateDiff(thisgamecomment[i].time)
+          // console.log(util.formatTime(thisgamecomment[i].time,("Y")))
+        }
+        var support1 = (res.data.team1likecount / (res.data.team1likecount + res.data.team2likecount));
+        var support2 = (res.data.team2likecount / (res.data.team1likecount + res.data.team2likecount));
+        res.data.team1likecounts = Math.floor(support1 * 10000) / 100;
+        res.data.team2likecounts = Math.floor(support2 * 10000) / 100;
         that.setData({
           thisGame: res.data
         });
         var thisgamecomments = that.data.thisGame.comments;
-        if (JSON.stringify(that.data.thisGame.comments) !='[]'){
+        if (JSON.stringify(that.data.thisGame.comments) != '[]') {
           var thiscommentsupportid = that.data.thisGame.comments[0].gameId + '' + that.data.thisGame.comments[0].id;
-        }else{
+        } else {
           var thiscommentsupportid = 0;
         }
         // 评论缓存  
@@ -170,6 +176,7 @@ Page({
           })
         } else {
           wx.hideToast();
+          res.data.time = util.getDateDiff(res.data.time)
           that.setData({
             addcomments: res.data
           });
@@ -272,6 +279,14 @@ Page({
           Supported1: Supported1
         })
         var count = Supported1 ? 1 : -1
+        var thisGame = that.data.thisGame;
+        thisGame.team1likecounts = Math.floor(((thisGame.team1likecount + count) / ((thisGame.team1likecount + count) + thisGame.team2likecount) * 10000)) / 100
+        thisGame.team2likecounts = Math.floor(((thisGame.team2likecount) / ((thisGame.team1likecount + count) + thisGame.team2likecount) * 10000)) / 100
+        thisGame.team1likecount = thisGame.team1likecount + count;
+        that.setData({
+          thisGame: thisGame
+        })
+
         wx.request({
           url: 'http://47.95.4.127:8080/HeiKeOnline/games/addSupport/' + this.data.thisGame.id + '.do',
           method: 'PUT',
@@ -305,6 +320,13 @@ Page({
           Supported2: Supported2
         })
         var count = Supported2 ? 1 : -1
+        var thisGame = that.data.thisGame;
+        thisGame.team2likecounts = Math.floor(((thisGame.team2likecount + count) / ((thisGame.team2likecount + count) + thisGame.team1likecount) * 10000)) / 100
+        thisGame.team1likecounts = Math.floor(((thisGame.team1likecount) / ((thisGame.team2likecount + count) + thisGame.team1likecount) * 10000)) / 100
+        thisGame.team2likecount = thisGame.team2likecount + count;
+        that.setData({
+          thisGame: thisGame
+        })
         wx.request({
           url: 'http://47.95.4.127:8080/HeiKeOnline/games/addSupport/' + this.data.thisGame.id + '.do',
           method: 'PUT',
@@ -336,43 +358,64 @@ Page({
     var that = this;
     var commentId = event.currentTarget.dataset.commentid;
     var gameId = event.currentTarget.dataset.gameid;
+    if (event.currentTarget.dataset.add) {
+      var add = event.currentTarget.dataset.add;
+    }
     var thiscommentsupportid = gameId + '' + commentId;
     // 获取comments对象
     var thisgamecomments = this.data.thisGame.comments;
     // 评论缓存  
-    
+
     var commentssupport = wx.getStorageSync('game_comments_support');
-    commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
-    wx.setStorageSync('game_comments_support', commentssupport)
-    that.setData({
-      commentssupport
-    })
-    
-    var count = commentssupport[thiscommentsupportid] ? 1:-1
-    
-    console.log(count)
+    if (JSON.stringify(commentssupport[thiscommentsupportid]) != 'undefined') {
+      commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
+      wx.setStorageSync('game_comments_support', commentssupport)
+      that.setData({
+        commentssupport
+      })
+    } else {
+      var commentssupport = wx.getStorageSync('game_comments_support');
+      commentssupport[thiscommentsupportid] = false;
+      commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
+      wx.setStorageSync('game_comments_support', commentssupport);
+      that.setData({
+        commentssupport
+      })
+    }
+
+
+    var count = commentssupport[thiscommentsupportid] ? 1 : -1
+
     var thisgamecomments = that.data.thisGame;
-    for (var i = 0; i < Object.keys(thisgamecomments.comments).length;i++){
-      if (thisgamecomments.comments[i].id == commentId){
-        thisgamecomments.comments[i].likecount = thisgamecomments.comments[i].likecount + count;
-        that.setData({
-          thisGame: thisgamecomments
-        })
-      } 
+    if (add) {
+      var addcomments = that.data.addcomments;
+      addcomments.likecount = addcomments.likecount + count;
+      that.setData({
+        addcomments: addcomments
+      })
+    } else {
+      for (var i = 0; i < Object.keys(thisgamecomments.comments).length; i++) {
+        if (thisgamecomments.comments[i].id == commentId) {
+          thisgamecomments.comments[i].likecount = thisgamecomments.comments[i].likecount + count;
+          that.setData({
+            thisGame: thisgamecomments
+          })
+        }
+      }
     }
 
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments/addlike/' + commentId+'.do',
-      data:{
+      url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments/addlike/' + commentId + '.do',
+      data: {
         gameId: gameId,
-        id:commentId,
-        count:count
+        id: commentId,
+        count: count
       },
-      method:'PUT',
+      method: 'PUT',
       header: {
         "Content-type": "application/json"
       },
-      success:function(res){
+      success: function (res) {
         // 数据绑定,设置缓存
       }
 
