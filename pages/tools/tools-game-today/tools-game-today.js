@@ -131,7 +131,7 @@ Page({
     wx.setStorageSync('game_follow', gamefollow);
     if (gamefollow[matchId]){
       wx.request({
-        url: 'http://192.168.28.176:8090/HeiKeOnline/users/concern.do',
+        url: 'http://47.95.4.127:8080/HeiKeOnline/users/concern.do',
         data: {
           userId: wx.getStorageSync('userInfoId'),
           gameId: matchId
@@ -148,7 +148,7 @@ Page({
       })
     }else{
       wx.request({
-        url: 'http://192.168.28.176:8090/HeiKeOnline/users/concern.do',
+        url: 'http://47.95.4.127:8080/HeiKeOnline/users/concern.do',
         data: {
           userId: wx.getStorageSync('userInfoId'),
           gameId: matchId

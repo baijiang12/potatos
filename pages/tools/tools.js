@@ -83,7 +83,7 @@ Page({
   },
   formSubimt: function (res) {
     wx.request({
-      url: 'http://192.168.28.176:8090/HeiKeOnline/formvalues.do',
+      url: 'http://47.95.4.127:8080/HeiKeOnline/formvalues.do',
       data: {
         userId: wx.getStorageSync('userInfoId'),
         // formId: res.detail.formId,

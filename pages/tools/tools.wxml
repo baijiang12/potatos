@@ -3,11 +3,7 @@
 <view class="tools-container">
   <view>
     <view class="gameing">
-    <form bindsubmit="formSubimtfalse" report-submit="true">
-      <button form-type="submit" class="top-module" class="btn">
       <text>已开赛</text>
-      </button>
-    </form>
     </view>
 
     <block wx:for="{{matchList.match_list}}" wx:for-item="match" wx:key="key">

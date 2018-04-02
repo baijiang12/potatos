@@ -218,46 +218,46 @@ Page({
             showCancel: false,
             success: function (result) {
               if (result.confirm) {
-                // wx.getUserInfo({
-                  // success: function (ress) {
-                  //   console.log(ress)
-                  //   app.globalData.userInfo = ress.userInfo;
-                  //   // 进行弹窗
-                  //   var currentStatu = e.currentTarget.dataset.statu;
-                  //   that.util(currentStatu)
-                  //   wx.request({
-                  //     url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
-                  //     data: {
-                  //       id: wx.getStorageSync('userInfoId'),
-                  //       name: ress.userInfo.nickName,
-                  //       icon: ress.userInfo.avatarUrl,
-                  //     },
-                  //     method: 'PUT',
-                  //     header: {
-                  //       "Content-type": "application/json"
-                  //     },
-                  //     success: function (resss) {
-                  //       // console.log(res)
-                  //     },
-                  //     fail: function () {
+                wx.openSetting({
+                  success: function (data) {
+                    if (data) {
+                      if (data.authSetting["scope.userInfo"] == true) {
+                        wx.getUserInfo({
+                          success: function (ress) {
+                            console.log(ress)
+                            app.globalData.userInfo = ress.userInfo;
+                            // 进行弹窗
+                            var currentStatu = e.currentTarget.dataset.statu;
+                            that.util(currentStatu)
+                            wx.request({
+                              url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
+                              data: {
+                                id: wx.getStorageSync('userInfoId'),
+                                name: ress.userInfo.nickName,
+                                icon: ress.userInfo.avatarUrl,
+                              },
+                              method: 'PUT',
+                              header: {
+                                "Content-type": "application/json"
+                              },
+                              success: function (resss) {
+                                // console.log(res)
+                              },
+                              fail: function () {
 
-                  //     }
-                  //   })
-                  // }
-                // })
-                // wx.getUserInfo({})
-                console.log(477)
-                wx.getUserInfo({
-                  success: res => {
-                    console.log(res)
-                    // that.globalData.userInfo = res.userInfo;
-                    // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                    // 所以此处加入 callback 以防止这种情况
-                    if (that.userInfoReadyCallback) {
-                      that.userInfoReadyCallback(res)
+                              }
+                            })
+                          }
+                        })
+                      }
+
                     }
+                  },
+                  fail: function () {
+                    console.info("设置失败返回数据");
+
                   }
-                })
+                });
               } else if (result.cancel) {
                 console.log('用户点击取消')
               }
