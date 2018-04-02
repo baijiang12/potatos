@@ -2,7 +2,7 @@
 <import src="tools-matchDate-template/tools-matchDate-template.wxml" />
 <view class='match-top'>
   <view class='follow'>
-    <image class='fol-img' src='/images/common/guanzhu.png'></image>
+    <image catchtap="followTap" class='fol-img' src='/images/common/guanzhu.png'></image>
   </view>
   <view class='tip'>
     - 下拉加载往日赛事 -

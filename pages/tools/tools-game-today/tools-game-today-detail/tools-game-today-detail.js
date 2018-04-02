@@ -155,7 +155,7 @@ Page({
     });
     var thisdata = {
       "gameId": gameId,
-      "userId": 1001,
+      "userId": wx.getStorageSync('userInfoId'),
       "content": textareaContent,
       "likecount": 0
     };
@@ -167,6 +167,8 @@ Page({
         "Content-Type": "application/json"
       },
       success: function (res) {
+
+        console.log(res)
         if (res.data.status == 0) {
           wx.hideToast()
           wx.showToast({

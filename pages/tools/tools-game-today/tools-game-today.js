@@ -94,4 +94,7 @@ Page({
       wx.stopPullDownRefresh() //停止下拉刷新
     }, 1000);
   },
+  followTap:function(res){
+
+  }
 })
