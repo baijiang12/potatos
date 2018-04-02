@@ -19,7 +19,6 @@ Page({
     });
   },
   sportDetail: function (event) {
-    // console.log(event.currentTarget.dataset.sportid);
     var matchStatus = event.currentTarget.dataset.status;
     if (matchStatus == 0) {
       wx.showToast({
@@ -29,7 +28,7 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: "tools-game-today/tools-game-today?matchId=" + event.currentTarget.dataset.matchId,
+        url: "tools-game-today/tools-game-today?matchId=" + event.currentTarget.dataset.sportid,
       })
     }
 
@@ -83,13 +82,12 @@ Page({
 
   },
   formSubimt: function (res) {
-    // console.log(wx.getStorageSync('userInfoId'))
     wx.request({
       url: 'http://192.168.28.176:8090/HeiKeOnline/formvalues.do',
       data: {
         userId: wx.getStorageSync('userInfoId'),
         // formId: res.detail.formId,
-        formId:1522639424078,
+        formId:1522653763724,
       },
       method: 'POST',
       header: {

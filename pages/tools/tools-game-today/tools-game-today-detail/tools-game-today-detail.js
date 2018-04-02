@@ -1,4 +1,5 @@
 var util = require('../../../../utils/util.js');
+var app = getApp()
 Page({
 
   /**
@@ -201,8 +202,71 @@ Page({
   },
 
   powerDrawer: function (e) {
-    var currentStatu = e.currentTarget.dataset.statu;
-    this.util(currentStatu)
+    var that = this;
+    // 判断是否有用户信息,若无,先询问用户,若用户同意,则
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已授权
+          var currentStatu = e.currentTarget.dataset.statu;
+          that.util(currentStatu)
+        } else {
+          // 未授权,获取用户信息
+          wx.showModal({
+            title: '提示',
+            content: '评论前请登录',
+            showCancel: false,
+            success: function (result) {
+              if (result.confirm) {
+                // wx.getUserInfo({
+                  // success: function (ress) {
+                  //   console.log(ress)
+                  //   app.globalData.userInfo = ress.userInfo;
+                  //   // 进行弹窗
+                  //   var currentStatu = e.currentTarget.dataset.statu;
+                  //   that.util(currentStatu)
+                  //   wx.request({
+                  //     url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
+                  //     data: {
+                  //       id: wx.getStorageSync('userInfoId'),
+                  //       name: ress.userInfo.nickName,
+                  //       icon: ress.userInfo.avatarUrl,
+                  //     },
+                  //     method: 'PUT',
+                  //     header: {
+                  //       "Content-type": "application/json"
+                  //     },
+                  //     success: function (resss) {
+                  //       // console.log(res)
+                  //     },
+                  //     fail: function () {
+
+                  //     }
+                  //   })
+                  // }
+                // })
+                // wx.getUserInfo({})
+                console.log(477)
+                wx.getUserInfo({
+                  success: res => {
+                    console.log(res)
+                    // that.globalData.userInfo = res.userInfo;
+                    // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                    // 所以此处加入 callback 以防止这种情况
+                    if (that.userInfoReadyCallback) {
+                      that.userInfoReadyCallback(res)
+                    }
+                  }
+                })
+              } else if (result.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+      }
+    })
+
   },
   util: function (currentStatu) {
     /* 动画部分 */
@@ -369,7 +433,7 @@ Page({
     // 评论缓存  
 
     var commentssupport = wx.getStorageSync('game_comments_support');
-    if(commentssupport){
+    if (commentssupport) {
       if (JSON.stringify(commentssupport[thiscommentsupportid]) != 'undefined') {
         commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
         wx.setStorageSync('game_comments_support', commentssupport)
@@ -385,7 +449,7 @@ Page({
           commentssupport
         })
       }
-    }else{
+    } else {
       var commentssupport = {};
       commentssupport[thiscommentsupportid] = false;
       commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
@@ -394,7 +458,7 @@ Page({
         commentssupport
       })
     }
-    
+
 
 
     var count = commentssupport[thiscommentsupportid] ? 1 : -1

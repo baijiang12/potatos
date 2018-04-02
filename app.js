@@ -111,6 +111,7 @@ App({
                 wx.setStorageSync('userInfoId', result.data.id);
                 wx.getUserInfo({
                   success: function (res) {
+                    that.globalData.userInfo = res.userInfo;
                     wx.request({
                       url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + result.data.id + '.do',
                       data: {
@@ -132,7 +133,7 @@ App({
                   }
                 })
               },
-              fail: function (res) { },
+              fail: function (res) {},
               complete: function () { }
             })
           } else {
