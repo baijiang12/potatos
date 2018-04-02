@@ -21,6 +21,7 @@
   height: 75rpx;
   width: 75rpx;
   vertical-align: middle;
+  border-radius:20px; 
 }
 
 .author {
@@ -44,7 +45,7 @@
   color: #999;
 }
 
-.new-title {
+.title {
   margin: 25rpx 10rpx 5rpx 30rpx;
   /* margin-left: 40rpx; *//* font-size: 36rpx; */
   font-weight: 700;
@@ -54,13 +55,14 @@
 }
 
 .horizon {
-  width: 660rpx;
+  width: 720rpx;
   height: 1px;
   background-color: #e5e5e5;
   vertical-align: middle;
   position: relative;
   top: 46rpx;
   margin: 0 auto;
+  margin-bottom: 60rpx;
   z-index: -99;
 }
 
@@ -74,27 +76,32 @@
   margin: 0 auto;
   z-index: -99;
 }
-
 .detail {
   color: #666;
   margin-left: 30rpx;
-  margin-top: 97rpx;
   margin-right: 30rpx;
   line-height: 44rpx;
   letter-spacing: 2px;
+  font-size: 24rpx;
 }
-
+.comment-image{
+  margin: 20rpx 20rpx 0rpx 20rpx;
+  width: 95%;
+  height: 460rpx;
+  border-radius: 25px;
+  box-shadow: 2px 0px 6px 0.1px #aaa;
+}
 .comment {
   display: flex;
   flex-direction: column;
   margin: 5rpx;
-  margin-bottom: 80rpx;
 }
 
 .user-img {
   height: 75rpx;
   width: 75rpx;
   vertical-align: middle;
+  border-radius: 20px;
 }
 
 /* .user-data {
@@ -151,6 +158,7 @@
   width: 40rpx;
   height: 40rpx;
   margin-left: 600rpx;
+  margin-bottom: 64rpx;
 }
 
 .love-num {
@@ -166,7 +174,6 @@
   position: fixed;
   bottom: 0;
 }
-
 .write-comment {
   /* border: 0 solid #CFCECF; */
   height: 90rpx;
@@ -179,7 +186,7 @@
 }
 
 .writeButton {
-  border: 0 solid #cfcecf;
+ border:0 solid #CFCECF;  
   background-color: #fefefe;
   color: #a6a6a6;
   font-weight: 300;
@@ -190,9 +197,8 @@
   letter-spacing: 2px;
   margin-right: 50rpx;
 }
-
-.button {
-  margin: 10rpx 10rpx 0rpx 25rpx;
+.button{
+  margin:10rpx 10rpx 0rpx 25rpx;
 }
 
 .icon {
@@ -202,7 +208,6 @@
   margin-top: 29rpx;
   margin-left: 30rpx;
 }
-
 .sumLove-img {
   float: left;
   margin-right: 26rpx;
@@ -231,7 +236,6 @@
   font-size: 30rpx;
   color: #a6a6a6;
 }
-
 .send {
   float: right;
   bottom: 0;
@@ -332,4 +336,4 @@
   top: 0px;
   background: rgba(0, 0, 0, 0.4);
   overflow: hidden;
-}
+} 

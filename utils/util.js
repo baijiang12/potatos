@@ -42,7 +42,7 @@ function getDateDiff(dateTimeStamp) {
 function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
-}
+} 
 function formatTime(number, format) {
 
   var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
@@ -62,40 +62,7 @@ function formatTime(number, format) {
   }
   return format;
 }
-
-function needUserInfo() {
-  wx.getSetting({
-    success: res => {
-      if (res.authSetting['scope.userInfo']) {
-        // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-        wx.getUserInfo({
-          success: function (res) {
-            // wx.request({
-            //   url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + that.globalData.userid + '.do',
-            //   data: {
-            //     id: userid,
-            //     name: res.userInfo.nickName,
-            //     icon: res.userInfo.avatarUrl,
-            //   },
-            //   method: 'PUT',
-            //   header: {
-            //     "Content-type": "application/json"
-            //   },
-            //   success: function (res) {
-            //     console.log(res)
-            //   },
-            //   fail: function () {
-
-            //   }
-            // })
-            wx.setStorageSync(userInfos, res.userInfo);
-          }
-        })
-      }
-    }
-  })
-}
 module.exports = {
   getDateDiff: getDateDiff,
-  formatTime: formatTime
+  formatTime:formatTime
 }
