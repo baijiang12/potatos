@@ -1,36 +1,207 @@
 // pages/news/news-detail/news-detail.js
+var time = require('../../../utils/util.js');
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    info:'',
-    flag: false  ,
+    info: '',
+    flag: false,
     showModalStatus: false,
     height: 20,
     focus: false,
     showModal: false,
-    imgUrls: [
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521534040161&di=89294943dd6b8df81c3331f344194f52&imgtype=0&src=http%3A%2F%2Fbpic.ooopic.com%2F15%2F64%2F23%2F15642315-8423be90a53c3b3b4f44c44db84359a2-2.jpg',
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521473355301&di=6dc5dceaae35bb9485a586a0e2751711&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01f402565e5b5032f875ae3401ed18.png',
-      'http://image.wufazhuce.com/Fv7sIjdPR0CceEDIZ4wd62jWAhTU',
-      'http://image.wufazhuce.com/FstbIkUvTiKbCRpGoeqvk_fQKgio',
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522067917&di=9b5ee7480672766eddd3fb56bf7fc270&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01b221565e5b516ac7255d2e98bbcb.jpg%401280w_1l_2o_100sh.jpg',
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521473246831&di=fb8ed098328bb4b928321e2999cbc74e&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F78%2F80%2F95c58PICn2f_1024.jpg',
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521474064312&di=a8ed7acf04007c4675e46219d943aa10&imgtype=0&src=http%3A%2F%2Feasyread.ph.126.net%2FpGkEQU81Eyc0_7NJk_Z1pQ%3D%3D%2F7916704721824964137.jpg'
-    ],
+    addcomments: {},
+    newsDetails: {},
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var that = this;
+    var newsId = options.id;
+    wx.request({
+      url: 'http://47.95.4.127:8080/HeiKeOnline/news/' + newsId + '.do',
+      method: 'GET',
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        var oldtime = res.data.time;
+        var mess = time.formatTime(oldtime, "Y/M/D h:m");
+        res.data.time = "";
+        res.data.time = mess;
+        for (var i = 0; i < res.data.newsComments.length; i++) {
+          var commentTime = res.data.newsComments[i].time; 
+          var date = time.getDateDiff(commentTime);
+          res.data.newsComments[i].time = "";
+          res.data.newsComments[i].time = date;
+        }
+        var content = res.data.content_str;
+        that.setData({
+          'newsDetails': res.data,
+        })
+        //设置唯一标识
+        var thisnewscomments = that.data.newsDetails.newsComments;
+        if (JSON.stringify(that.data.newsDetails.newsComments) != '[]') {
+          var thiscommentzanid = that.data.newsDetails.newsComments[0].newsId + '' + that.data.newsDetails.newsComments[0].id;
+        } else {
+          var thiscommentzanid = 0;
+        }
+        //为每一条评论赋值为变量，方便管理每一条评论
+        var commentzanid = {};
+        for (var i = 0; i < Object.keys(thisnewscomments).length; i++) {
+          commentzanid[i] = newsId + '' + thisnewscomments[i].id;
+        }
+        //缓存是否已存在
+        var commentszan = wx.getStorageSync('news_comments_zan');
+        if (commentszan) {
+          var commentzan = {};
+          for (var i = 0; i < Object.keys(thisnewscomments).length; i++) {
+            commentzan[i] = commentszan[commentzanid[i]];
+          }
+          //判断
+          if (commentszan[thiscommentzanid] != null) {
+            that.setData({
+              commentszan
+            })
+          } else {
+            for (var i = 0; i < Object.keys(thisnewscomments).length; i++) {
+              commentszan[commentzanid[i]] = false;
+              wx.setStorageSync('news_comments_zan', commentszan);
+            }
+            that.setData({
+              commentszan
+            })
+          }
+        } else {
+          //添加缓存
+          var commentszan = {};
+          for (var i = 0; i < Object.keys(thisnewscomments).length; i++) {
+            commentszan[commentzanid[i]] = false;
+            wx.setStorageSync('news_comments_zan', commentszan);
+          }
+          that.setData({
+            commentszan
+          })
+        }
+      },
+      fail: function (error) {
+        console.log(error);
+      }
+    })
   },
   bindFormSubmit: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.newsid;
     var textareaContent = e.detail.value.textarea;
-    textareaContent = '';
-    this.setData({
-      info:''
+    that.setData({
+      info: ''
+    })
+    wx.request({
+      url: 'http://47.95.4.127:8080/HeiKeOnline/newscomments.do',
+      data: { 'newsId': id, 'userId': wx.getStorageSync('userInfoId'), 'content': textareaContent, 'likecount': 0 },
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.status == 0) {
+          wx.hideToast();
+          wx.showToast({
+            title: '不能含有敏感词汇',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.hideToast();
+          var mess = time.getDateDiff(new Date(), "Y/M/D h:m");
+          that.setData({
+            addcomments: res.data,
+            mess: mess,
+          })
+          wx.showToast({
+            title: '评论成功',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err);
+      }
+    })
+    wx.showToast({
+      icon: 'loading',
+      duration: 6000
     })
   },
   powerDrawer: function (e) {
-    var currentStatu = e.currentTarget.dataset.statu;
-    this.util(currentStatu)
+    var that = this;
+    // 判断是否有用户信息,若无,先询问用户,若用户同意,则
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已授权
+          var currentStatu = e.currentTarget.dataset.statu;
+          that.util(currentStatu)
+        } else {
+          // 未授权,获取用户信息
+          wx.showModal({
+            title: '提示',
+            content: '评论前请登录',
+            showCancel: false,
+            success: function (result) {
+              if (result.confirm) {
+                wx.openSetting({
+                  success: function (data) {
+                    if (data) {
+                      if (data.authSetting["scope.userInfo"] == true) {
+                        wx.getUserInfo({
+                          success: function (ress) {
+                            console.log(ress)
+                            app.globalData.userInfo = ress.userInfo;
+                            // 进行弹窗
+                            var currentStatu = e.currentTarget.dataset.statu;
+                            that.util(currentStatu)
+                            wx.request({
+                              url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
+                              data: {
+                                id: wx.getStorageSync('userInfoId'),
+                                name: ress.userInfo.nickName,
+                                icon: ress.userInfo.avatarUrl,
+                              },
+                              method: 'PUT',
+                              header: {
+                                "Content-type": "application/json"
+                              },
+                              success: function (resss) {
+                                // console.log(res)
+                              },
+                              fail: function () {
+
+                              }
+                            })
+                          }
+                        })
+                      }
+
+                    }
+                  },
+                  fail: function () {
+                    console.info("设置失败返回数据");
+
+                  }
+                });
+              } else if (result.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+      }
+    })
+
   },
   util: function (currentStatu) {
     /* 动画部分 */
@@ -80,11 +251,77 @@ Page({
       );
     }
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  zanTap: function (event) {
+    var that = this;
+    var commentId = event.currentTarget.dataset.commentid;
+    var newsId = event.currentTarget.dataset.newsid;
+    if (event.currentTarget.dataset.add) {
+      var add = event.currentTarget.dataset.add;
+    }
+    var thiscommentzanid = newsId + '' + commentId;
+    // 获取comments对象
+    var thisnewscomments = that.data.newsDetails.newsComments;
+    // 评论缓存
+    var commentszan = wx.getStorageSync('news_comments_zan');
+    if (commentszan) {
+      if (JSON.stringify(commentszan[thiscommentzanid] != 'undefined')) {
+        commentszan[thiscommentzanid] = !commentszan[thiscommentzanid];
+        wx.setStorageSync('news_comments_zan', commentszan);
+        that.setData({
+          commentszan
+        })
+      } else {
+        commentszan = wx.getStorageSync('news_comments_zan');
+        commentszan[thiscommentzanid] = false;
+        commentszan[thiscommentzanid] = !commentszan[thiscommentzanid];
+        wx.setStorageSync('news_comments_zan', commentszan);
+        that.setData({
+          commentszan
+        })
+      }
+    }else{
+      var commentszan ={};
+      commentszan[thiscommentzanid] = false;
+      commentszan[thiscommentzanid] = !commentszan[thiscommentzanid];
+      wx.setStorageSync('news_comments_zan', commentszan);
+      that.setData({
+        commentszan
+      })
+    }
+    var count = commentszan[thiscommentzanid] ? 1 : -1;
+    var thisnewscomments = that.data.newsDetails;
+    if (add) {
+      var addcomments = that.data.addcomments;
+      addcomments.likecount = addcomments.likecount + count;
+      that.setData({
+        addcomments: addcomments
+      })
+    } else {
+      for (var i = 0; i < Object.keys(thisnewscomments.newsComments).length; i++) {
+        if (thisnewscomments.newsComments[i].id == commentId) {
+          thisnewscomments.newsComments[i].likecount = thisnewscomments.newsComments[i].likecount + count;
+          that.setData({
+            newsDetails: thisnewscomments
+          })
+        }
+      }
+    }
+    wx.request({
+      url: 'http://47.95.4.127:8080/HeiKeOnline/newscomments/addlike/' + commentId + '.do',
+      data: {
+        newsId: newsId,
+        id: commentId,
+        count: count
+      },
+      method: 'PUT',
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
 
+      }
+
+    })
   },
   submit: function () {
     this.setData({
@@ -96,7 +333,7 @@ Page({
 
   },
 
-  mytouchstart:function(){
+  mytouchstart: function () {
     this.setData({
       showModal: false
     })
@@ -115,55 +352,4 @@ Page({
   bindTextAreaBlur: function (e) {
     console.log(e.detail.value)
   },
-  // bindFormSubmit: function (e) {
-  //   console.log(e.detail.value.textarea)
-  // },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

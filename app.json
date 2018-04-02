@@ -6,7 +6,8 @@
     "pages/tools/tools",
     "pages/me/me",
     "pages/tools/tools-game-today/tools-game-today",
-    "pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail"
+    "pages/tools/tools-game-today/tools-game-today-detail/tools-game-today-detail",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -29,6 +30,12 @@
         "text": "赛事",
         "iconPath": "images/tarbar/unfootball.png",
         "selectedIconPath": "images/tarbar/football.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "反馈",
+        "iconPath": "images/tarbar/uncontact.png",
+        "selectedIconPath": "images/tarbar/contact.png"
       }
     ]
   }

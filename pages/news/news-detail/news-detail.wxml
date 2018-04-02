@@ -1,39 +1,55 @@
 <view class='detail-container'>
-  <image class='head-image' src='{{imgUrls[4]}}'></image>
+  <image class='head-image' src='{{newsDetails.headImage}}'></image>
   <view class='author-date'>
-    <image class="avatar" src="/images/author/1.png"></image>
-    <text class="author">表白菌</text>
+    <image class="avatar" src="{{newsDetails.author.icon}}"></image>
+    <text class="author">{{newsDetails.author.name}}</text>
     <text class="const-text">发表于</text>
-    <text class="date">今天18：00</text>
+    <text class="date">{{newsDetails.time}}</text>
   </view>
-  <text class="new-title">当你的好朋有有了更好的朋友，你应该怎么做？</text>
+  <text class="title">{{newsDetails.title}}</text>
   <view class="horizon"></view>
-  <text class="detail">菊黄蟹正肥，品尝秋之味。徐志摩把“看初花的荻芦”和“到楼外楼吃蟹”并列为秋天来杭州不能错过的风雅之事；用林妹妹的话讲是“螯封嫩玉双双满，壳凸红脂块块香”；在《世说新语》里，晋毕卓更是感叹“右手持酒杯，左手持蟹螯，拍浮酒船中，便足了一生矣。”漫漫人生长路，美食与爱岂可辜负？于是作为一个吃货，突然也很想回味一下属于我的味蕾记忆。记忆中的秋蟹，是家人的味道，弥漫着浓浓的亲情。\n\n是谁来自山川湖海，却囿于昼夜，厨房与爱？ 是母亲，深思熟虑，聪明耐心。吃蟹前，总会拿出几件工具，煞有介事而乐此不疲。告诉我们螃蟹至寒，需要佐以姜茶以祛寒，在配备的米醋小碟里，亦添入姜丝与紫苏，前者驱寒后者增香。泡好菊花茶，岁月静好，我们静等。"</text>
+  <block wx:for='{{newsDetails.content_str}}' wx:for-item='item' wx:for-index='index' wx:key='dewaDetail'>
+    <view wx:if="{{index % 2 == 0}}">
+      <view wx:if="{{item == 'false'}}"></view>
+      <view wx:if="{{item != 'false'}}">
+        <text class='detail'>{{item}}</text>
+      </view>
+    </view>
+    <view wx:if="{{index % 2 != 0}}">
+      <view wx:if="{{item == 'false'}}"></view>
+      <view wx:elif="{{item != 'false'}}">
+        <image class="comment-image" src='{{item}}' />
+      </view>
+    </view>
+  </block>
   <view class='comment'>
     <text class='commnd-list'>评论列表</text>
+    <view class='addcomments' wx:if='{{addcomments.user}}'>
     <view class="horizon2"></view>
-    <view class='user-data'>
-      <image class="user-img" src="/images/author/1.png"></image>
-      <text class="username">表白菌</text>
-      <text class="comment-date">今天18：00</text>
+      <view class='user-data'>
+        <image class="user-img" src="{{addcomments.user.icon}}"></image>
+        <text class="username">{{addcomments.user.name}}</text>
+        <text class="comment-date">{{mess}}</text>
+      </view>
+      <text class="comment-content">{{addcomments.content}}</text>
+      <view class='love'>
+        <image class='love-img' catchtap='zanTap' data-newsId="{{addcomments.newsId}}" data-commentId="{{addcomments.id}}" data-add="true" src="{{commentszan[(addcomments.newsId + '' + addcomments.id)] ? '/images/common/HsupportL.png'  : '/images/common/zan.png'}}"></image> 
+        <text class='love-num'>{{addcomments.likecount}}</text>
+      </view>
     </view>
-    <text class="comment-content"> 漫漫人生长路，美食与爱岂可辜负？泡好菊花茶，岁月静好，我们静等</text>
-    <view class='love'>
-      <image class='love-img' src='/images/common/zan.png'></image>
-      <text class='love-num'>113</text>
-    </view>
-
+    <block wx:for='{{newsDetails.newsComments}}' wx:item-item='item' wx:index-index='{{index}}' wx:key='comment'>
     <view class="horizon2"></view>
-    <view class='user-data'>
-      <image class="user-img" src="/images/author/1.png"></image>
-      <text class="username">表白菌</text>
-      <text class="comment-date">今天18：00</text>
-    </view>
-    <text class="comment-content"> 漫漫人生长路，美食与爱岂可辜负？泡好菊花茶，岁月静好，我们静等</text>
-    <view class='love'>
-      <image class='love-img' src='/images/common/zan.png'></image>
-      <text class='love-num'>113</text>
-    </view>
+        <view class='user-data'>
+          <image class="user-img" src="{{item.user.icon}}"></image>
+          <text class="username">{{item.user.name}}</text>
+          <text class="comment-date">{{item.time}}</text>
+        </view>
+        <text class="comment-content">{{item.content}}</text>
+        <view class='love'>
+            <image class='love-img' catchtap='zanTap' data-newsId="{{newsDetails.id ? newsDetails.id:''}}" data-commentId="{{item.id ? item.id: ''}}" src="{{commentszan[(newsDetails.id + '' + item.id)] ? '/images/common/HsupportL.png'  : '/images/common/zan.png'}}"></image>  
+          <text class='love-num'>{{item.likecount}}</text>
+        </view>
+    </block>
   </view>
 </view>
 
@@ -58,7 +74,7 @@
   <!--drawer content-->
   <view class="drawer_title">请留下你的评论</view>
   <view class="drawer_content">
-    <form bindsubmit="bindFormSubmit">
+    <form bindsubmit="bindFormSubmit" data-newsId = '{{newsDetails.id}}'>
       <textarea class='drawer_textarea' selection-start="1" auto-focus="{{true}}" show-confirm-bar="{{false}}" name="textarea" value='{{info}}'></textarea>
       <view class='btn_sum'>
         <button class='drawer_btn' bindtap="powerDrawer" data-statu="close"> 取消 </button>

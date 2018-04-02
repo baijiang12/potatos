@@ -11,41 +11,26 @@
     </view>
     <scroll-view scroll-y>
       <swiper indicator-dots="true" autoplay="{{false}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#FFFFFF" circular="{{false}}">
-        <block wx:for="{{imgUrls}}" wx:key="key">
+        <block wx:for="{{lunbotu.imgUrls}}" wx:key='lunbo'>
           <swiper-item>
-            <image src="{{item}}" class="slide-image" />
+            <image src="{{item}}" wx:for-index='index' data-newsId='{{index}}' catchtap='onImage' class="slide-image" />
           </swiper-item>
         </block>
       </swiper>
     </scroll-view>
   </view>
-  <view class='news-category'catchtap="onNewsDetail">
-    <text class='news-category-title'>- 话题 -</text>
-    <view class='news-category-container'>
-      <text class='news-category-content'>当你的好朋有有了更好的朋友，你应该怎么做？</text>
-      <text class='news-category-form'>来自：表白菌</text>
-      <image src='{{imgUrls[5]}}' class='news-category-img'></image>
-      <text class='news-category-date'>今天 18：00</text>
+  <block wx:for='{{newsArr}}' wx:for-item='item' wx:for-index='ids' wx:key='news'>
+    <view class='news-category' catchtap="onNewsDetail" data-newsId='{{item.id}}'>
+      <text class='news-category-title'>- {{item.kindof}} -</text>
+      <view class='news-category-container'>
+        <text class='news-category-content'>{{item.title}}</text>
+        <text class='news-category-form'>来自：{{item.author.name}}</text>
+        <image src='{{item.headImage}}' class='news-category-img'></image>
+        <text  class='news-category-date'>{{item.time}}</text>
+      </view>
     </view>
-  </view>
-
-  <view class='news-category'>
-    <text class='news-category-title'>- 赛事 -</text>
-    <view class='news-category-container'>
-      <text class='news-category-content'>PLP 黑科大足球联赛即将开赛，你准备好了么？</text>
-      <text class='news-category-form'>来自：足球协会</text>
-      <image src='{{imgUrls[6]}}' class='news-category-img'></image>
-      <text class='news-category-date'>今天 8：00</text>
-    </view>
-  </view>
-
-  <view class='news-category'>
-    <text class='news-category-title'>- 咨询 -</text>
-    <view class='news-category-container'>
-      <text class='news-category-content'>四月三号，黑科大开始进行春招，一起来看看吧！</text>
-      <text class='news-category-form'>来自：创新基地</text>
-      <image src='{{imgUrls[3]}}' class='news-category-img'></image>
-      <text class='news-category-date'>昨天 17：00</text>
-    </view>
+  </block>
+  <view>
+    <text class='tip' hidden='{{hidden}}'>{{title}}</text>
   </view>
 </view>

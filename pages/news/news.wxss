@@ -1,4 +1,6 @@
-
+page{
+  background-color:#b3d4db; 
+}
 .new-top-body{
   padding: 0 25rpx 15rpx 25rpx; 
   background-color: #FFFFFF;
@@ -111,4 +113,7 @@ scroll-view{
   margin: 15rpx 0;
   font-size: 24rpx;
   color: #999999;
+}
+.tip {
+  padding-top: 9px;
 }
