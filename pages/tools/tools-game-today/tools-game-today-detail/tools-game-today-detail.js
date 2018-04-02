@@ -367,14 +367,24 @@ Page({
     // 评论缓存  
 
     var commentssupport = wx.getStorageSync('game_comments_support');
-    if (JSON.stringify(commentssupport[thiscommentsupportid]) != 'undefined') {
-      commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
-      wx.setStorageSync('game_comments_support', commentssupport)
-      that.setData({
-        commentssupport
-      })
-    } else {
-      var commentssupport = wx.getStorageSync('game_comments_support');
+    if(commentssupport){
+      if (JSON.stringify(commentssupport[thiscommentsupportid]) != 'undefined') {
+        commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
+        wx.setStorageSync('game_comments_support', commentssupport)
+        that.setData({
+          commentssupport
+        })
+      } else {
+        var commentssupport = wx.getStorageSync('game_comments_support');
+        commentssupport[thiscommentsupportid] = false;
+        commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
+        wx.setStorageSync('game_comments_support', commentssupport);
+        that.setData({
+          commentssupport
+        })
+      }
+    }else{
+      var commentssupport = {};
       commentssupport[thiscommentsupportid] = false;
       commentssupport[thiscommentsupportid] = !commentssupport[thiscommentsupportid];
       wx.setStorageSync('game_comments_support', commentssupport);
@@ -382,6 +392,7 @@ Page({
         commentssupport
       })
     }
+    
 
 
     var count = commentssupport[thiscommentsupportid] ? 1 : -1
