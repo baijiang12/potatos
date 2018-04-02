@@ -94,7 +94,7 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
-        console.log(res)
+        // console.log(res)
       },
       fail: function () {
 
@@ -102,7 +102,4 @@ Page({
 
     })
   },
-  formSubimtfalse: function (res) {
-    console.log(res.detail.formId)
-  }
 })
