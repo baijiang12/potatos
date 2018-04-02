@@ -13,6 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     // 赛事关注缓存
     var that = this;
     that.setData({
@@ -40,13 +41,13 @@ Page({
       })
       wx.setStorageSync('game_follow', gamefollow);
     }
+    // 获取比赛
     wx.request({
       url: 'http://47.95.4.127:8080/HeiKeOnline/games/list.do',
       method: 'POST',
       data: {
         offset: 0,
         limit: 10,
-        current: '',
         direction: '>'
       },
       header: {
@@ -56,7 +57,6 @@ Page({
         that.setData({
           todayGame: res.data
         })
-        // console.log(that.data.todayGame)
       },
       fail: function (error) {
         console.log(error)
@@ -82,17 +82,18 @@ Page({
       method: 'POST',
       data: {
         offset: 0,
-        limit: 10,
-        current: '2018-03-29',
-        direction: '>'
+        limit: 5,
+        direction: '<'
       },
       header: {
         "Content-type": "application/json"
       },
       success: function (res) {
+        console.log(res)
         // 将新获取到的比赛追加到前面 
         if (res.data) {
-          var temp = res.data.reverse();
+          // var temp = res.data.reverse();
+          var temp = res.data;
           var former = that.data.todayGame;
           var lenformer = Object.keys(temp).length;
           for (var i = 0; i < Object.keys(former).length; i++) {
@@ -105,7 +106,7 @@ Page({
           wx.showToast({
             title: '无更多赛事',
             icon: none,
-            duration: 1000
+            duration: 2000
           })
         }
       },
@@ -141,7 +142,6 @@ Page({
         },
         method: 'POST',
         success:function(res){
-          console.log(res)
         },
         fail:function(){}
 
@@ -158,7 +158,6 @@ Page({
         },
         method: 'DELETE',
         success: function (res) {
-          console.log(res)
         },
         fail: function () { }
 
