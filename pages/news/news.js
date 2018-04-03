@@ -47,10 +47,6 @@ Page({
       that.setData({
         newsArr: res,
       })
-      //数据绑定
-      that.setData({
-        lunbotu: newsData.lunbotu
-      })
     });
     limit++;
     that.data.limit = limit;
@@ -99,7 +95,7 @@ Page({
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/news/list.do',
+      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/news/list.do',
       data: { offset: 0, limit: 2 },
       method: 'POST',
       header: {
@@ -123,7 +119,7 @@ Page({
     var that = this;
     var limit = that.data.limit;
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/news/list.do',
+      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/news/list.do',
       data: { offset: 0, limit: limit },
       method: 'POST',
       header: {
