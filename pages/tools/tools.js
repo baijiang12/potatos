@@ -1,5 +1,6 @@
 // pages/tools/tools.js
 var matchList = require("../data.js");
+import {Config} from '../../utils/config.js';
 Page({
 
   /**
@@ -83,7 +84,7 @@ Page({
   },
   formSubimt: function (res) {
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/formvalues.do',
+      url: Config.restUrl +'formvalues.do',
       data: {
         userId: wx.getStorageSync('userInfoId'),
         // formId: res.detail.formId,

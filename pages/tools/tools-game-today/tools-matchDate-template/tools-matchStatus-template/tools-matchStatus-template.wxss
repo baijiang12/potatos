@@ -88,3 +88,8 @@ image {
   width: 65rpx;
   height: 65rpx;
 }
+.vs {
+  color: #888;
+  font-size: 65rpx;
+  margin-right: 50rpx;
+}

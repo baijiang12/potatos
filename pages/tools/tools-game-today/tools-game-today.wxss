@@ -37,12 +37,6 @@
   background: #eee;
 }
 
-.vs {
-  color: #888;
-  font-size: 65rpx;
-  margin-right: 50rpx;
-}
-
 .vs1 {
   color: #888;
   font-size: 65rpx;

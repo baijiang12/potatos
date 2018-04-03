@@ -1,4 +1,5 @@
 var util = require('../../../../utils/util.js');
+import { Config } from '../../../../utils/config.js';
 var app = getApp()
 Page({
 
@@ -78,6 +79,7 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
+        console.log(res)
 
         // 将时间戳转换为正常时间格式
         var thisgamecomment = res.data.comments;
@@ -161,7 +163,7 @@ Page({
       "likecount": 0
     };
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments.do',
+      url: Config.restUrl +'gamecomments.do',
       method: 'POST',
       data: JSON.stringify(thisdata),
       header: {
@@ -230,7 +232,7 @@ Page({
                             var currentStatu = e.currentTarget.dataset.statu;
                             that.util(currentStatu)
                             wx.request({
-                              url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
+                              url: Config.restUrl +'users/' + wx.getStorageSync('userInfoId') + '.do',
                               data: {
                                 id: wx.getStorageSync('userInfoId'),
                                 name: ress.userInfo.nickName,
@@ -354,7 +356,7 @@ Page({
         })
 
         wx.request({
-          url: 'http://47.95.4.127:8080/HeiKeOnline/games/addSupport/' + this.data.thisGame.id + '.do',
+          url: Config.restUrl +'games/addSupport/' + this.data.thisGame.id + '.do',
           method: 'PUT',
           data: {
             "gameId": this.data.thisGame.id,
@@ -394,7 +396,7 @@ Page({
           thisGame: thisGame
         })
         wx.request({
-          url: 'http://47.95.4.127:8080/HeiKeOnline/games/addSupport/' + this.data.thisGame.id + '.do',
+          url: Config.restUrl +'games/addSupport/' + this.data.thisGame.id + '.do',
           method: 'PUT',
           data: {
             "gameId": this.data.thisGame.id,
@@ -482,7 +484,7 @@ Page({
     }
 
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/gamecomments/addlike/' + commentId + '.do',
+      url: Config.restUrl +'gamecomments/addlike/' + commentId + '.do',
       data: {
         gameId: gameId,
         id: commentId,

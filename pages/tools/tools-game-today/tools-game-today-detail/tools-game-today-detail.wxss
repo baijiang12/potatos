@@ -1,5 +1,5 @@
 @import "../tools-players-template/tools-players-template.wxss";
- @import "../tools-matchDate-template/tools-matchStatus-template/tools-matchStatus-template.wxss"; 
+@import "../tools-matchDate-template/tools-matchStatus-template/tools-matchStatus-template.wxss"; 
 
 .tool-game-today-detail-container {
   display: flex;
