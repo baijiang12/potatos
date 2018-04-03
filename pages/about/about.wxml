@@ -2,13 +2,14 @@
   <view class='desc-title'>
     问题描述
   </view>
+  <form bindsubmit='formSubmit'>
   <view class='descs'>
-    <textarea class='desc-textarea' placeholder="请描述你遇到的问题或提供宝贵的建议" placeholder-style="color:#ccc;font-size:30rpx;" />
-  </view>
+    <textarea class='desc-textarea' name='textarea' placeholder="请描述你遇到的问题或提供宝贵的建议" placeholder-style="color:#ccc;font-size:30rpx;" />
+  </view> 
   <view class='sub'>
-    <button class='sub-color'>提交</button>
+    <button class='sub-color' form-type='submit' catchtap='onsubmit'>提交</button>
   </view>
-
+  </form>
   <view class='contact'>
     <view class='tel'>Tel: 13199262669 18145146697</view>
   </view>

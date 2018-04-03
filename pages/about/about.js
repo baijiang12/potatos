@@ -13,11 +13,48 @@ Page({
   onLoad: function (options) {
 
   },
+  formSubmit:function(e){
+    var textareaContent = e.detail.value.textarea;
+    wx.request({
+      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/feedbacks.do',
+      method: 'POST',
+      data: { "userId": wx.getStorageSync('userInfoId'),"current":textareaContent},
+      header: {
+        "Content-Type": "application/json"
+      },
+      success: function (res) {
+        if (res.data.status == 0) {
+          wx.showToast({
+            title: '提交失败，请重试！',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.hideToast();
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000
+          });
+        }
+      },
+      fail: function () {
+
+      }
+    });
+    wx.showToast({
+      icon: 'loading',
+      duration: 6000
+    })
+  },
+  onsubmit:function(e){
+    //console.log(111)
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function () { 
 
   },
 
