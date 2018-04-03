@@ -69,7 +69,7 @@ Page({
     }
     // 发送比赛详情请求
     wx.request({
-      url: "http://47.95.4.127:8080/HeiKeOnline/games/" + gameId + ".do",
+      url: Config.restUrl +'games/' + gameId + '.do',
       method: 'GET',
       data: {
         offset: 0,
@@ -79,10 +79,13 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
-        console.log(res)
 
         // 将时间戳转换为正常时间格式
         var thisgamecomment = res.data.comments;
+        var commentnum = Object.keys(thisgamecomment).length;
+        that.setData({
+          commentnum: commentnum
+        })
         for (var i = 0; i < Object.keys(thisgamecomment).length; i++) {
           res.data.comments[i].time = util.getDateDiff(thisgamecomment[i].time)
           // console.log(util.formatTime(thisgamecomment[i].time,("Y")))
@@ -171,7 +174,6 @@ Page({
       },
       success: function (res) {
 
-        console.log(res)
         if (res.data.status == 0) {
           wx.hideToast()
           wx.showToast({
@@ -185,6 +187,11 @@ Page({
           that.setData({
             addcomments: res.data
           });
+          var commentnum = that.data.commentnum +1 ;
+
+          that.setData({
+            commentnum: commentnum
+          })
           wx.showToast({
             title: '评论成功',
             icon: 'none',
@@ -226,7 +233,6 @@ Page({
                       if (data.authSetting["scope.userInfo"] == true) {
                         wx.getUserInfo({
                           success: function (ress) {
-                            console.log(ress)
                             app.globalData.userInfo = ress.userInfo;
                             // 进行弹窗
                             var currentStatu = e.currentTarget.dataset.statu;

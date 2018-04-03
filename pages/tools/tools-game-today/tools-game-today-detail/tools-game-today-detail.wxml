@@ -91,13 +91,13 @@
             <button class='writeButton' bindtap="powerDrawer" data-statu="open">写一个评论..</button>
           </view>
           <view class='icon'>
-            <view class='sumLove'>
+            <!-- <view class='sumLove'>
               <image class='sumLove-img' src='/images/common/heart.png'></image>
               <text class='sumLove-text'>407</text>
-            </view>
+            </view> -->
             <view class='sunCom'>
               <image class='sumCom-img' src='/images/common/comment.png'></image>
-              <text class='sumCom-text'>98</text>
+              <text class='sumCom-text'>{{commentnum}}</text>
             </view>
           </view>
         </view>

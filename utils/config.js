@@ -3,5 +3,5 @@ class Config {
 
   }
 }
-Config.restUrl = "http://xiaochengxu.kexie.group:8080/HeiKeOnline/";
+Config.restUrl = "http://xiaochengxu.kexie.group/HeiKeOnline/";
 export { Config };
