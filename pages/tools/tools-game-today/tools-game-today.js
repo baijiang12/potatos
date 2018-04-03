@@ -1,4 +1,5 @@
 // pages/tools/tools-game-today/tools-game-today.js
+import { Config } from '../../../utils/config.js';
 Page({
 
   /**
@@ -13,12 +14,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
     // 赛事关注缓存
     var that = this;
     that.setData({
       matchId: options.matchId
     })
+    // 设置更新比赛数目的缓存
+    wx.removeStorageSync('refresh_game')
+    wx.setStorageSync('refresh_game', 0);
     var gamefollow = wx.getStorageSync('game_follow');
     // 判断是否有赛事关注缓存
     if (gamefollow) {
@@ -43,7 +47,7 @@ Page({
     }
     // 获取比赛
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/games/list.do',
+      url: Config.restUrl + 'games/list/future.do',
       method: 'POST',
       data: {
         offset: 0,
@@ -78,10 +82,10 @@ Page({
     var that = this;
     // current 应该设置一个缓存,需将天数累加
     wx.request({
-      url: 'http://47.95.4.127:8080/HeiKeOnline/games/list.do',
+      url: Config.restUrl + 'games/list/ago.do',
       method: 'POST',
       data: {
-        offset: 0,
+        offset: wx.getStorageSync('refresh_game'),
         limit: 5,
         direction: '<'
       },
@@ -89,10 +93,10 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
-        console.log(res)
+        wx.setStorageSync('refresh_game', wx.getStorageSync('refresh_game') + 5);
         // 将新获取到的比赛追加到前面 
-        if (res.data) {
-          // var temp = res.data.reverse();
+        if (JSON.stringify(res.data) != '[]') {
+          var temp = res.data.reverse();
           var temp = res.data;
           var former = that.data.todayGame;
           var lenformer = Object.keys(temp).length;
@@ -105,7 +109,7 @@ Page({
         } else {
           wx.showToast({
             title: '无更多赛事',
-            icon: none,
+            icon: 'none',
             duration: 2000
           })
         }
@@ -130,9 +134,9 @@ Page({
       gamefollow
     })
     wx.setStorageSync('game_follow', gamefollow);
-    if (gamefollow[matchId]){
+    if (gamefollow[matchId]) {
       wx.request({
-        url: 'http://47.95.4.127:8080/HeiKeOnline/users/concern.do',
+        url: Config.restUrl + 'users/concern.do',
         data: {
           userId: wx.getStorageSync('userInfoId'),
           gameId: matchId
@@ -141,14 +145,14 @@ Page({
           "Content-type": "application/json"
         },
         method: 'POST',
-        success:function(res){
+        success: function (res) {
         },
-        fail:function(){}
+        fail: function () { }
 
       })
-    }else{
+    } else {
       wx.request({
-        url: 'http://47.95.4.127:8080/HeiKeOnline/users/concern.do',
+        url: Config.restUrl + 'users/concern.do',
         data: {
           userId: wx.getStorageSync('userInfoId'),
           gameId: matchId
@@ -163,7 +167,7 @@ Page({
 
       })
     }
-    
+
 
   }
 })

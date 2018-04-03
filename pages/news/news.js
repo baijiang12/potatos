@@ -1,7 +1,6 @@
 // pages/news/news.js
 import { News } from 'news-model.js';
 var news = new News();
-var newsData = require('../../data/news-data.js');
 var time = require('../../utils/util.js');
 Page({
   /**

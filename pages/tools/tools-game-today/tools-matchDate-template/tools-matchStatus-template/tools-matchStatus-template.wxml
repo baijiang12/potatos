@@ -15,7 +15,7 @@
         <view class='match-info'>
           <view class='vs'>
             <!-- <image src="../../../../../images/common/vs.png"></image> -->
-            vs
+            <text> vs</text>
           </view>
           <view>/</view>
           <view>
