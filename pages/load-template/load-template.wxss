@@ -1,0 +1,27 @@
+/* pages/load/load.wxss */
+/* .loadingcontainer{
+  align-items: center;
+  padding: 200rpx 0;
+} */
+ @-webkit-keyframes load{ 
+0%{
+transform:rotate(0);
+}
+50%{
+transform:rotate(160deg);
+}
+100%{
+transform:rotate(360deg);
+}
+} 
+ .loading{
+   position: absolute;
+/* margin-top: 500rpx; */
+top: 37%;
+width: 60px;
+height: 60px;
+border: 5px solid #fff;
+border-left-color: #ff66CC;
+border-radius: 50%;
+-webkit-animation:load 1s linear 1s infinite; 
+} 
