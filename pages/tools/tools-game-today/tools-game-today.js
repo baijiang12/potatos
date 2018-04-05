@@ -127,46 +127,127 @@ Page({
   },
   followTap: function (res) {
     var that = this;
-    var matchId = that.data.matchId;
-    var gamefollow = wx.getStorageSync('game_follow');
-    gamefollow[matchId] = !gamefollow[matchId];
-    that.setData({
-      gamefollow
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已授权
+          var matchId = that.data.matchId;
+          var gamefollow = wx.getStorageSync('game_follow');
+          gamefollow[matchId] = !gamefollow[matchId];
+          that.setData({
+            gamefollow
+          })
+          wx.setStorageSync('game_follow', gamefollow);
+          if (gamefollow[matchId]) {
+            wx.request({
+              url: Config.restUrl + 'users/concern.do',
+              data: {
+                userId: wx.getStorageSync('userInfoId'),
+                gameId: matchId
+              },
+              header: {
+                "Content-type": "application/json"
+              },
+              method: 'POST',
+              success: function (res) {
+              },
+              fail: function () { }
+
+            })
+          } else {
+            wx.request({
+              url: Config.restUrl + 'users/concern.do',
+              data: {
+                userId: wx.getStorageSync('userInfoId'),
+                gameId: matchId
+              },
+              header: {
+                "Content-type": "application/json"
+              },
+              method: 'DELETE',
+              success: function (res) {
+              },
+              fail: function () { }
+
+            })
+          }
+        } else {
+          // 未授权,获取用户信息
+          wx.showModal({
+            title: '提示',
+            content: '关注前请登录',
+            showCancel: false,
+            success: function (result) {
+              if (result.confirm) {
+                wx.openSetting({
+                  success: function (data) {
+                    if (data) {
+                      if (data.authSetting["scope.userInfo"] == true) {
+                        wx.getUserInfo({
+                          success: function (ress) {
+                            app.globalData.userInfo = ress.userInfo;
+                            // 进行关注
+                            var matchId = that.data.matchId;
+                            var gamefollow = wx.getStorageSync('game_follow');
+                            gamefollow[matchId] = !gamefollow[matchId];
+                            that.setData({
+                              gamefollow
+                            })
+                            wx.setStorageSync('game_follow', gamefollow);
+                            if (gamefollow[matchId]) {
+                              wx.request({
+                                url: Config.restUrl + 'users/concern.do',
+                                data: {
+                                  userId: wx.getStorageSync('userInfoId'),
+                                  gameId: matchId
+                                },
+                                header: {
+                                  "Content-type": "application/json"
+                                },
+                                method: 'POST',
+                                success: function (res) {
+                                },
+                                fail: function () { }
+
+                              })
+                            } else {
+                              wx.request({
+                                url: Config.restUrl + 'users/concern.do',
+                                data: {
+                                  userId: wx.getStorageSync('userInfoId'),
+                                  gameId: matchId
+                                },
+                                header: {
+                                  "Content-type": "application/json"
+                                },
+                                method: 'DELETE',
+                                success: function (res) {
+                                },
+                                fail: function () { }
+
+                              })
+                            }
+                          }
+                        })
+                      }
+
+                    }
+                  },
+                  fail: function () {
+                    console.info("设置失败返回数据");
+
+                  }
+                });
+              } else if (result.cancel) {
+                console.log('用户点击取消')
+              }
+            }
+          })
+        }
+      }
     })
-    wx.setStorageSync('game_follow', gamefollow);
-    if (gamefollow[matchId]) {
-      wx.request({
-        url: Config.restUrl + 'users/concern.do',
-        data: {
-          userId: wx.getStorageSync('userInfoId'),
-          gameId: matchId
-        },
-        header: {
-          "Content-type": "application/json"
-        },
-        method: 'POST',
-        success: function (res) {
-        },
-        fail: function () { }
 
-      })
-    } else {
-      wx.request({
-        url: Config.restUrl + 'users/concern.do',
-        data: {
-          userId: wx.getStorageSync('userInfoId'),
-          gameId: matchId
-        },
-        header: {
-          "Content-type": "application/json"
-        },
-        method: 'DELETE',
-        success: function (res) {
-        },
-        fail: function () { }
 
-      })
-    }
 
 
   }

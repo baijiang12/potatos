@@ -79,6 +79,7 @@ Page({
         "Content-type": "application/json"
       },
       success: function (res) {
+        console.log(res);
 
         // 将时间戳转换为正常时间格式
         var thisgamecomment = res.data.comments;

@@ -1,6 +1,7 @@
 // pages/tools/tools.js
 var matchList = require("../data.js");
-import {Config} from '../../utils/config.js';
+import { Config } from '../../utils/config.js';
+var util = require('../../utils/util.js');
 Page({
 
   /**
@@ -9,15 +10,23 @@ Page({
   data: {
 
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    this.setData({
+      loading: true
+    })
     // console.log(matchList);
     this.setData({
       matchList: matchList
     });
+    setTimeout(function () {
+      that.setData({
+        loading: false
+      })
+    },5000)
   },
   sportDetail: function (event) {
     var matchStatus = event.currentTarget.dataset.status;
@@ -84,11 +93,11 @@ Page({
   },
   formSubimt: function (res) {
     wx.request({
-      url: Config.restUrl +'formvalues.do',
+      url: Config.restUrl + 'formvalues.do',
       data: {
         userId: wx.getStorageSync('userInfoId'),
-        // formId: res.detail.formId,
-        formId:1522653763724,
+        formId: res.detail.formId,
+        // formId: 1522653763724,
       },
       method: 'POST',
       header: {

@@ -1,5 +1,6 @@
 <!--pages/tools/tools.wxml-->
 <import src="tools-template/tools-template.wxml" />
+<import src="../load-template/load-template.wxml" />
 <view class="tools-container">
   <view>
     <view class="gameing">
@@ -28,3 +29,4 @@
   </view>
 
 </view>
+<template is="loadtemplate" data="{{loading}}"/>

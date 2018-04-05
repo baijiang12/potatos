@@ -1,14 +1,17 @@
 //app.js
+import { Config } from 'utils/config.js';
 App({
   globalData: {
     userInfo: null,
     userid: null
   },
   onLaunch: function () {
+    // wx.removeStorageSync('userInfoId');
     // 判断用户是否已在服务器注册
     var that = this;
     if (wx.getStorageSync('userInfoId')) {
       // 已注册 用户信息更新
+      // console.log(wx.getStorageSync('userInfoId'));
       // 验证用户session_key是否过期
       wx.checkSession({
         success: function () {
@@ -51,7 +54,7 @@ App({
               // 发送 res.code 到后台换取 openId, sessionKey, unionId\
               if (res.code) {
                 wx.request({
-                  url: 'http://47.95.4.127:8080/HeiKeOnline/users/update' + res.code + '.do',
+                  url: Config.restUrl +'users/update' + res.code + '.do',
                   data: {
                     id: wx.getStorageSync('userInfoId'),
                     code: res.code
@@ -64,7 +67,7 @@ App({
                       success: function (res) {
                         // 用户信息更新
                         wx.request({
-                          url: 'http://47.95.4.127:8080/HeiKeOnline/users/register.do?code=' + res.code,
+                          url: Config.restUrl +'users/register.do?code=' + res.code,
                           data: {
                             id: result.data.id,
                             name: res.userInfo.nickName,
@@ -102,7 +105,7 @@ App({
           // 发送 res.code 到后台换取 openId, sessionKey, unionId\
           if (res.code) {
             wx.request({
-              url: 'http://47.95.4.127:8080/HeiKeOnline/users/register.do?code=' + res.code,
+              url: Config.restUrl +'users/register.do?code=' + res.code,
               data: {},
               method: 'GET',
               success: function (result) {
@@ -113,7 +116,7 @@ App({
                   success: function (res) {
                     that.globalData.userInfo = res.userInfo;
                     wx.request({
-                      url: 'http://47.95.4.127:8080/HeiKeOnline/users/' + result.data.id + '.do',
+                      url: Config.restUrl +'users/' + result.data.id + '.do',
                       data: {
                         id: result.data.id,
                         name: res.userInfo.nickName,

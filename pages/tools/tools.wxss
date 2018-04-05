@@ -1,5 +1,6 @@
 /* pages/tools/tools.wxss */
 @import "tools-template/tools-template.wxss";
+@import "../load-template/load-template.wxss";
 .tools-container{
   display: flex;
   flex-direction: column;

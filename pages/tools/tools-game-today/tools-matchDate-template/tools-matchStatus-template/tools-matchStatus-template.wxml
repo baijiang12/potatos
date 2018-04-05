@@ -42,6 +42,23 @@
       </view>
 
     </view>
+    <view wx:elif="{{status=='进行中'}}">
+      <view class="text-middle-view">
+        <view class='match-list-status'>
+          <view class='match-name'>{{name}}</view>
+          <view class='match-status-1'>{{status}}</view>
+        </view>
+        <view class='match-info'>
+          <view class='vs'>{{score1}}</view>
+          <view class='maohao'>：</view>
+          <view>
+            <view class='vs1'>{{score2}}</view>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
 
     <view class="team2-view">
       <template is="matchVSTemplate" data="{{...team2}}" />

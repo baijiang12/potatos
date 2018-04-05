@@ -62,7 +62,13 @@ function formatTime(number, format) {
   }
   return format;
 }
+function ourShowToast(bool){
+  this.setData({
+    loading:bool
+  })
+}
 module.exports = {
   getDateDiff: getDateDiff,
-  formatTime:formatTime
+  formatTime:formatTime,
+  ourShowToast:ourShowToast
 }

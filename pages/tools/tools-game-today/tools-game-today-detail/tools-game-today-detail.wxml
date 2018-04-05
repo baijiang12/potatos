@@ -129,9 +129,10 @@
               <view class='match-data-css'>{{pointInfo.happentime}}'</view>
               <view class='match-data-css'>{{pointInfo.member.name}}</view>
               <view class='match-data-img'>{{pointInfo.event}}</view>
-              <view class='match-data-css'>{{pointInfo.currentscore}}</view>
-              <view class='match-data-css'>人</view>
-              <view class='match-data-img'>图标</view>
+              <view class='match-data-css'>{{pointInfo.currentscore}}</view>              
+              <view wx:if="{{pointInfo.eventKind == ChANGE}}" class='match-data-img'><image src="/images/score/score.png"></image></view>
+              <view wx:elif="{{pointInfo.eventKind == SCORE}}" class='match-data-img'><image src="/images/score/score.png"></image></view>
+              <view wx:else class='match-data-img'><image src="/images/score/score.png"></image></view>
             </view>
           </block>
         </view>
