@@ -16,7 +16,7 @@ Page({
   formSubmit:function(e){
     var textareaContent = e.detail.value.textarea;
     wx.request({
-      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/feedbacks.do',
+      url: 'https://xiaochengxu.kexie.group/HeiKeOnline/feedbacks.do',
       method: 'POST',
       data: { "userId": wx.getStorageSync('userInfoId'),"current":textareaContent},
       header: {

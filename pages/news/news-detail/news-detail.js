@@ -21,7 +21,7 @@ Page({
     var that = this;
     var newsId = options.id;
     wx.request({
-      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/news/' + newsId + '.do',
+      url: 'https://xiaochengxu.kexie.group/HeiKeOnline/news/' + newsId + '.do',
       method: 'GET',
       header: {
         "Content-Type": "application/json"
@@ -99,7 +99,7 @@ Page({
       info: ''
     })
     wx.request({
-      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/newscomments.do',
+      url: 'https://xiaochengxu.kexie.group/HeiKeOnline/newscomments.do',
       data: { 'newsId': id, 'userId': wx.getStorageSync('userInfoId'), 'content': textareaContent, 'likecount': 0 },
       method: 'POST',
       header: {
@@ -165,7 +165,7 @@ Page({
                             var currentStatu = e.currentTarget.dataset.statu;
                             that.util(currentStatu)
                             wx.request({
-                              url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
+                              url: 'https://xiaochengxu.kexie.group/HeiKeOnline/users/' + wx.getStorageSync('userInfoId') + '.do',
                               data: {
                                 id: wx.getStorageSync('userInfoId'),
                                 name: ress.userInfo.nickName,
@@ -307,7 +307,7 @@ Page({
       }
     }
     wx.request({
-      url: 'http://xiaochengxu.kexie.group:8080/HeiKeOnline/newscomments/addlike/' + commentId + '.do',
+      url: 'https://xiaochengxu.kexie.group/HeiKeOnline/newscomments/addlike/' + commentId + '.do',
       data: {
         newsId: newsId,
         id: commentId,

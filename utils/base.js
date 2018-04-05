@@ -7,7 +7,7 @@ class Base {
     var that = this;
     var url = this.baseRequestUrl + params.url;
     if (!params.type) {
-      params.type = 'GET';  
+      params.type = 'GET'; 
     }
     wx.request({
       url: url,
